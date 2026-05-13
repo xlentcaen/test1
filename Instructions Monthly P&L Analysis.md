@@ -99,6 +99,8 @@ Characteristics:
 - **Value LOC** = Value in local currency of the company
 - **Value EUR** = Value in EUR using the fixed standard exchange rate set for the full fiscal year
 
+When analyzing an individual company, **Value LOC** can be used because it reflects performance in the company’s local currency. When analyzing the total across multiple companies, focus on **Value EUR**, since it provides a comparable consolidated view across currencies.
+
 ## Allocation Flow
 
 ### Step 1: CC-CC Cost Centers
