@@ -33,6 +33,8 @@ Example:
 Example:
 - **YTD in 202611** = `202609 + 202610 + 202611`
 
+In a monthly analysis, the monthly value is important because it shows the result for the individual period. YTD summarizes the fiscal year up to the current month. It fluctuates less than the monthly view and is useful for identifying the overall trend and underlying business performance.
+
 ## Accounting String Dimensions
 The analysis is based on the following accounting string dimensions:
 
