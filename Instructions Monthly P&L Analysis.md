@@ -79,10 +79,14 @@ Characteristics:
 
 ## Account P&L Calculations
 
+### Definitions
 - **Total Operating Costs** = each cost center's local costs
+- **TOTAL INTERNAL FEES** = internal allocations between cost centers; revenue for **CC-CC** cost centers and cost for **CC-PC** cost centers
 - **TOTAL LOCAL COSTS** = the cost within the country or company
-- **TOTAL LOCAL COSTS** = **Total Operating Costs** + **TOTAL INTERNAL FEES**
 - **Service fee** = costs from the other companies on the same cost center
+
+### Formulas
+- **TOTAL LOCAL COSTS** = **Total Operating Costs** + **TOTAL INTERNAL FEES**
 - **Total Costs** = **TOTAL LOCAL COSTS** + **Service fee**
 - **Profit** = **Margin** - **Total Costs**
 
