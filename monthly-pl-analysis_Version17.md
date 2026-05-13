@@ -10,7 +10,9 @@ The companies in the group are:
 - **SE** = Sweden
 - **SK** = Slovakia
 - **CN-NT** = China Nantong
-- **CN** = China Shanghai
+- **CN** = China Shanghai (**legacy**)
+
+**CN** is a legacy company. Financial transactions may still occur on this company and it can be used for **validation** and reconciliation purposes, but it should **not** be used in **performance studies** or when evaluating operational performance across active companies.
 
 ### Cost Center Group
 **Cost Center Group** is a grouping of Cost Centers. It maps where the cost appears in the **functional P&L**.
@@ -111,7 +113,9 @@ Characteristics:
 ## Analysis Areas
 
 ### By Company
-- Compare performance across **SE**, **SK**, **CN-NT**, and **CN**
+- Compare performance across **SE**, **SK**, and **CN-NT**
+- Exclude **CN** from performance studies because it is a legacy company
+- Use **CN** only for validation, reconciliation, and historical transaction review
 - Identify differences in revenue, cost base, and profitability
 - Highlight currency and structural effects
 
@@ -165,6 +169,7 @@ Validate that:
 - Are negative results in **CC-PC** allocated correctly to Profit Centers?
 - Which Profit Centers generate the strongest results?
 - How do **Monthly** and **YTD** views differ across the fiscal year?
+- Is **CN** only being used for validation and not for performance evaluation?
 
 ## Notes
 Use:
@@ -172,3 +177,5 @@ Use:
 - **YTD** for fiscal year accumulated analysis
 - **Value LOC** when local entity performance matters
 - **Value EUR** when comparing across companies using the fixed fiscal-year exchange rate
+- exclude **CN** from performance studies because it is a legacy company
+- include **CN** for validation, reconciliation, and historical transaction checks
