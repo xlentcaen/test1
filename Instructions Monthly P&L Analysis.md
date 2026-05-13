@@ -11,13 +11,13 @@ Examples:
 - **CN-NT** = China Nantong
 - **CN** = China Shanghai (**legacy**)
 
-**CN** is a legacy company. Financial transactions may still occur on this company and it can be used for **validation** and reconciliation purposes, but it should **not** be used in **performance evaluation**.
+**CN** is a legacy company. Financial transactions may still occur on this company and it can be used for **validation** and reconciliation purposes, but it should **not** be used in **performance analysis**.
 
 ### Scope
-This is a **full P&L** analysis.
+This is a **full P&L (Profit and Loss)** analysis.
 
 ### Cost Center Group
-**Cost Center Group** is a grouping of Cost Centers. It maps where the cost appears in the **functional P&L**.
+**Cost Center Group** is a grouping of Cost Centers. It maps where the cost appears in the **functional P&L (Profit and Loss)**.
 
 ### Period
 **Period** is the month in format `YYYYMM`.
@@ -35,7 +35,7 @@ Example:
 Example:
 - **YTD in 202611** = `202609 + 202610 + 202611`
 
-In a monthly analysis, the monthly value is important because it shows the result for the individual period. YTD summarizes the fiscal year up to the current month. It fluctuates less than the monthly view and is useful for understanding the accumulated trend.
+In a monthly analysis, the monthly value is important because it shows the result for the individual period. YTD summarizes the fiscal year up to the current month. It fluctuates less than the monthly value and is useful for tracking the overall development.
 
 ## Accounting String Dimensions
 The analysis is based on the following accounting string dimensions:
@@ -79,7 +79,7 @@ Characteristics:
 - This negative result needs to be allocated to **Profit Centers**
 - Their cost base reflects both direct costs and allocated costs
 
-## Account P&L Calculations
+## Account P&L (Profit and Loss) Calculations
 
 ### Definitions
 - **Total Operating Costs** = each cost center's local costs
@@ -92,7 +92,7 @@ Characteristics:
 - **Total Costs** = **TOTAL LOCAL COSTS** + **Service fee**
 - **Profit** = **Margin** - **Total Costs**
 
-## Functional P&L Calculations
+## Functional P&L (Profit and Loss) Calculations
 
 - **TOTAL COST** =
   **Category Area**
@@ -131,7 +131,7 @@ When analyzing an individual company, **Value LOC** can be used because it refle
 - The negative result from **CC-PC** cost centers is allocated to **Profit Centers**
 - This ensures profitability is reflected at **PC** level
 
-## Monthly P&L Summary
+## Monthly P&L (Profit and Loss) Summary
 
 | Month | Company | Account | CC | PC | Value LOC | Value EUR | Accumulation |
 |-------|---------|---------|----|----|-----------|-----------|--------------|
@@ -160,7 +160,7 @@ When analyzing an individual company, **Value LOC** can be used because it refle
 - Use cost center codes only when referring to Cost Centers
 
 ### By Cost Center Group
-- Analyze how costs are distributed in the functional P&L
+- Analyze how costs are distributed in the functional P&L (Profit and Loss)
 - Track the impact of each functional area on total cost and operating result
 
 ### By Profit Center
