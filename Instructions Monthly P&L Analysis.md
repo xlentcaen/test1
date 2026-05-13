@@ -80,6 +80,7 @@ Characteristics:
 ## Account P&L Calculations
 
 - **Total Operating Costs** = each cost center's local costs
+- **TOTAL LOCAL COSTS** = the cost within the country or company
 - **TOTAL LOCAL COSTS** = **Total Operating Costs** + **TOTAL INTERNAL FEES**
 - **Total Costs** = **TOTAL LOCAL COSTS** + **Service fee**
 - **Profit** = **Margin** - **Total Costs**
