@@ -82,6 +82,7 @@ Characteristics:
 - **Total Operating Costs** = each cost center's local costs
 - **TOTAL LOCAL COSTS** = the cost within the country or company
 - **TOTAL LOCAL COSTS** = **Total Operating Costs** + **TOTAL INTERNAL FEES**
+- **Service fee** = costs from the other companies on the same cost center
 - **Total Costs** = **TOTAL LOCAL COSTS** + **Service fee**
 - **Profit** = **Margin** - **Total Costs**
 
