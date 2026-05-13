@@ -39,6 +39,14 @@ The analysis is based on the following accounting string dimensions:
 - **Account** = General Ledger account
 - **CC (Cost Center)** = three-digit number
 - **PC (Profit Center)** = Profit Center
+- **Profit Center Name** = descriptive name used together with the Profit Center code
+
+When referring to a **Profit Center**, always use the code together with the value from **Profit Center Name**.
+
+Example:
+- **Q11** should be written as **Q11 Assembly**
+
+For **Cost Centers**, use the cost center code only, since there is no separate **Cost Center Name** column.
 
 ## Cost Center Logic
 
@@ -130,6 +138,7 @@ Characteristics:
 - Confirm that **CC-CC** cost centers net to zero
 - Review how costs are allocated from **CC-CC** to **CC-PC** through **Total Internal Fees**
 - Review how negative results in **CC-PC** are allocated onward to **Profit Centers**
+- Use cost center codes only when referring to Cost Centers
 
 ### By Cost Center Group
 - Analyze how costs are distributed in the functional P&L
@@ -137,6 +146,8 @@ Characteristics:
 
 ### By Profit Center
 - Analyze profitability by Profit Center
+- Always refer to Profit Centers using both code and **Profit Center Name**
+- Example: **Q11 Assembly**
 - Compare commercial/business performance across profit-responsible units
 - Evaluate the impact of allocated results from **CC-PC** cost centers
 
@@ -159,6 +170,7 @@ For **CC-PC** cost centers, validate that:
 Validate that:
 - Profit Centers receive the allocated negative result from **CC-PC**
 - the final Profit Center profitability reflects both direct and allocated costs
+- Profit Centers are referred to using both code and **Profit Center Name**
 
 ## Key Review Questions
 - Which companies contribute most to revenue and profit?
@@ -170,6 +182,7 @@ Validate that:
 - Which Profit Centers generate the strongest results?
 - How do **Monthly** and **YTD** views differ across the fiscal year?
 - Is **CN** only being used for validation and not for performance evaluation?
+- Are Profit Centers consistently named using both code and **Profit Center Name**?
 
 ## Notes
 Use:
@@ -179,3 +192,5 @@ Use:
 - **Value EUR** when comparing across companies using the fixed fiscal-year exchange rate
 - exclude **CN** from performance studies because it is a legacy company
 - include **CN** for validation, reconciliation, and historical transaction checks
+- always refer to Profit Centers using both the code and **Profit Center Name**
+- refer to Cost Centers using the code only
