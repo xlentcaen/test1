@@ -7,15 +7,15 @@ Convert SQL queries written with friendly or business-oriented names into techni
 In M3, table names are technical identifiers and are typically 6 characters long.
 
 Examples:
-- `MITMAS` = Item Master
-- `OOLINE` = Customer order, lines
-- `OOHEAD` = Customer order, head
+- `MITMAS` = [Item Master]
+- `OOLINE` = [Customer order, lines]
+- `OOHEAD` = [Customer order, head]
 
 SQL written by users may refer to business concepts such as:
-- Item Master
-- Customer order, lines
-- Customer order, head
-- Warehouse
+- [Item Master]
+- [Customer order, lines]
+- [Customer order, head]
+- [Warehouse]
 
 These should be translated into the corresponding M3 table and field names before execution or processing.
 
@@ -45,9 +45,9 @@ The SQL conversion logic should use these CSV files as the primary mapping sourc
 ## Example 1
 ### Friendly input
 ```sql
-SELECT Item number, Item Description
-FROM Item Master
-WHERE Item number = 'A100'
+SELECT [Item number], [Item Description]
+FROM [Item Master]
+WHERE [Item number] = 'A100'
 ```
 
 ### Converted M3-style input
@@ -113,9 +113,9 @@ The parser must also detect:
 For each table in the query, translate the friendly table name into the corresponding M3 technical table name using the CSV mapping source.
 
 Examples:
-- `Item Master` → `MITMAS`
-- `Customer order, lines` → `OOLINE`
-- `Customer order, head` → `OOHEAD`
+- `[Item Master]` → `MITMAS`
+- `[Customer order, lines]` → `OOLINE`
+- `[Customer order, head]` → `OOHEAD`
 
 Table aliases must be preserved.
 
@@ -164,19 +164,19 @@ The preferred behavior should be configurable.
 ## Mapping Examples
 | Friendly Name | M3 Technical Name | Type | Context |
 |---|---|---|---|
-| Item Master | MITMAS | Table | General |
-| Item number | MMITNO | Field | MITMAS |
-| Item Description | MMITDS | Field | MITMAS |
-| Customer order, lines | OOLINE | Table | General |
-| Customer order, head | OOHEAD | Table | General |
-| Company | OBCONO | Field | OOLINE |
-| Company | OACONO | Field | OOHEAD |
-| Facility | OBFACI | Field | OOLINE |
-| Warehouse | OBWHLO | Field | OOLINE |
-| Division | OBDIVI | Field | OOLINE |
-| Division | OADIVI | Field | OOHEAD |
-| Customer order number | OBORST | Field | OOLINE |
-| Customer order number | OAORST | Field | OOHEAD |
+| [Item Master] | MITMAS | Table | General |
+| [Item number] | MMITNO | Field | MITMAS |
+| [Item Description] | MMITDS | Field | MITMAS |
+| [Customer order, lines] | OOLINE | Table | General |
+| [Customer order, head] | OOHEAD | Table | General |
+| [Company] | OBCONO | Field | OOLINE |
+| [Company] | OACONO | Field | OOHEAD |
+| [Facility] | OBFACI | Field | OOLINE |
+| [Warehouse] | OBWHLO | Field | OOLINE |
+| [Division] | OBDIVI | Field | OOLINE |
+| [Division] | OADIVI | Field | OOHEAD |
+| [Customer order number] | OBORST | Field | OOLINE |
+| [Customer order number] | OAORST | Field | OOHEAD |
 
 ## Notes
 - M3 fields are often prefixed in a way that relates to the table structure.
