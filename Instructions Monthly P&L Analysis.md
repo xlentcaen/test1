@@ -12,7 +12,7 @@ The companies in the group are:
 - **CN-NT** = China Nantong
 - **CN** = China Shanghai (**legacy**)
 
-**CN** is a legacy company. Financial transactions may still occur on this company and it can be used for **validation** and reconciliation purposes, but it should **not** be used in **performance[...]**
+**CN** is a legacy company. Financial transactions may still occur on this company and it can be used for **validation** and reconciliation purposes, but it should **not** be used in **performance evaluation**.
 
 ### Cost Center Group
 **Cost Center Group** is a grouping of Cost Centers. It maps where the cost appears in the **functional P&L**.
@@ -33,7 +33,7 @@ Example:
 Example:
 - **YTD in 202611** = `202609 + 202610 + 202611`
 
-In a monthly analysis, the monthly value is important because it shows the result for the individual period. YTD summarizes the fiscal year up to the current month. It fluctuates less than the monthly view and is useful for identifying the overall trend and underlying business performance.
+In a monthly analysis, the monthly value is important because it shows the result for the individual period. YTD summarizes the fiscal year up to the current month. It fluctuates less than the monthly view and is useful for understanding the accumulated trend.
 
 ## Accounting String Dimensions
 The analysis is based on the following accounting string dimensions:
@@ -60,8 +60,9 @@ Cost Centers are categorized as either:
 **CC-CC** cost centers are allocation cost centers. They are allocated to other cost centers.
 
 Characteristics:
-- They carry **Total Operating Costs**
-- They receive offsetting income through **Total Internal Fees**
+- They carry **Total Operating Costs**, which represent each cost center's local costs
+- They receive offsetting income through **TOTAL INTERNAL FEES**
+- **TOTAL INTERNAL FEES** is revenue for **CC-CC** cost centers
 - Their result should always be **0**
 
 This means the operating cost in a **CC-CC** cost center should be fully offset by internal fee postings.
@@ -70,13 +71,15 @@ This means the operating cost in a **CC-CC** cost center should be fully offset 
 **CC-PC** cost centers are operational cost centers linked to Profit Centers.
 
 Characteristics:
-- They receive allocated costs from **CC-CC** cost centers through **Total Internal Fees**
+- They receive allocated costs from **CC-CC** cost centers through **TOTAL INTERNAL FEES**
+- **TOTAL INTERNAL FEES** is a cost for **CC-PC** cost centers
 - They usually show a **negative result**
 - This negative result needs to be allocated to **Profit Centers**
 - Their cost base reflects both direct costs and allocated costs
 
 ## Account P&L Calculations
 
+- **Total Operating Costs** = each cost center's local costs
 - **TOTAL LOCAL COSTS** = **Total Operating Costs** + **TOTAL INTERNAL FEES**
 - **Total Costs** = **TOTAL LOCAL COSTS** + **Service fee**
 - **Profit** = **Margin** - **Total Costs**
@@ -101,17 +104,19 @@ Break down **Total Cost** into its underlying cost components and review the mai
 - **Value LOC** = Value in local currency of the company
 - **Value EUR** = Value in EUR using the fixed standard exchange rate set for the full fiscal year
 
-When analyzing an individual company, **Value LOC** can be used because it reflects performance in the company’s local currency. When analyzing the total across multiple companies, focus on **Value EUR**, since it provides a comparable consolidated view across currencies.
+When analyzing an individual company, **Value LOC** can be used because it reflects performance in the company’s local currency. When analyzing the total across multiple companies, focus on **Value EUR** to ensure comparability.
 
 ## Allocation Flow
 
 ### Step 1: CC-CC Cost Centers
 - **CC-CC** cost centers collect operating costs
-- These costs are offset through **Total Internal Fees**
+- These costs are offset through **TOTAL INTERNAL FEES**
+- **TOTAL INTERNAL FEES** is revenue in **CC-CC** cost centers
 - Result in **CC-CC** should always be **0**
 
 ### Step 2: CC-PC Cost Centers
-- **CC-PC** cost centers receive allocations from **CC-CC** through **Total Internal Fees**
+- **CC-PC** cost centers receive allocations from **CC-CC** through **TOTAL INTERNAL FEES**
+- **TOTAL INTERNAL FEES** is a cost in **CC-PC** cost centers
 - They typically show a **negative result**
 
 ### Step 3: Profit Centers
@@ -142,7 +147,7 @@ When analyzing an individual company, **Value LOC** can be used because it refle
 - Analyze cost ownership by Cost Center
 - Distinguish between **CC-CC** and **CC-PC**
 - Confirm that **CC-CC** cost centers net to zero
-- Review how costs are allocated from **CC-CC** to **CC-PC** through **Total Internal Fees**
+- Review how costs are allocated from **CC-CC** to **CC-PC** through **TOTAL INTERNAL FEES**
 - Review how negative results in **CC-PC** are allocated onward to **Profit Centers**
 - Use cost center codes only when referring to Cost Centers
 
@@ -161,13 +166,15 @@ When analyzing an individual company, **Value LOC** can be used because it refle
 
 ### CC-CC Validation
 For **CC-CC** cost centers, validate that:
-- **Total Operating Costs** + **Total Internal Fees** offset each other
+- **Total Operating Costs** + **TOTAL INTERNAL FEES** offset each other
+- **TOTAL INTERNAL FEES** is treated as revenue
 - the final result is always **0**
 - any deviation indicates a possible allocation or posting issue
 
 ### CC-PC Validation
 For **CC-PC** cost centers, validate that:
-- allocated costs from **CC-CC** are included through **Total Internal Fees**
+- allocated costs from **CC-CC** are included through **TOTAL INTERNAL FEES**
+- **TOTAL INTERNAL FEES** is treated as a cost
 - they usually show a negative result before Profit Center allocation
 - their negative result is allocated onward to Profit Centers
 - profitability at Profit Center level reflects these allocations
