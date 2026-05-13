@@ -11,6 +11,8 @@ Examples:
 - `OOLINE` = [Customer order, lines]
 - `OOHEAD` = [Customer order, head]
 
+The user-friendly names referred to in this document are the MDP names. MDP is M3's own user-friendly naming convention for tables and fields.
+
 SQL written by users may refer to business concepts such as:
 - [Item Master]
 - [Customer order, lines]
@@ -181,6 +183,7 @@ The preferred behavior should be configurable.
 ## Notes
 - M3 fields are often prefixed in a way that relates to the table structure.
 - The same friendly field name may map differently depending on table context.
+- The user-friendly names used for conversion are MDP names, which are M3's own user-friendly labels.
 - A central mapping dictionary is recommended.
 - Query conversion should work for SELECT lists, FROM clauses, JOIN clauses, WHERE conditions, and other SQL expressions where mapped identifiers are used.
 - The mapping dictionary should be generated from the CSV vocabulary files.
