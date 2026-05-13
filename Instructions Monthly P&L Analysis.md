@@ -95,6 +95,8 @@ Characteristics:
 
 - **OPERATING RESULT** = **TOTAL GP** + **TOTAL COST**
 
+Break down **Total Cost** into its underlying cost components and review the main drivers.
+
 ## Values
 - **Value LOC** = Value in local currency of the company
 - **Value EUR** = Value in EUR using the fixed standard exchange rate set for the full fiscal year
