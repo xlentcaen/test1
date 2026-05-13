@@ -2,17 +2,19 @@
 
 ## Explanations
 
-### Scope
-This is a **full P&L** analysis.
-
 ### Company
-The companies in the group are:
+**Company** and **country** mean the same thing in this analysis.
+
+Examples:
 - **SE** = Sweden
 - **SK** = Slovakia
 - **CN-NT** = China Nantong
 - **CN** = China Shanghai (**legacy**)
 
 **CN** is a legacy company. Financial transactions may still occur on this company and it can be used for **validation** and reconciliation purposes, but it should **not** be used in **performance evaluation**.
+
+### Scope
+This is a **full P&L** analysis.
 
 ### Cost Center Group
 **Cost Center Group** is a grouping of Cost Centers. It maps where the cost appears in the **functional P&L**.
@@ -82,7 +84,7 @@ Characteristics:
 ### Definitions
 - **Total Operating Costs** = each cost center's local costs
 - **TOTAL INTERNAL FEES** = internal allocations between cost centers; revenue for **CC-CC** cost centers and cost for **CC-PC** cost centers
-- **TOTAL LOCAL COSTS** = the cost within the country or company
+- **TOTAL LOCAL COSTS** = the cost within the company or country
 - **Service fee** = costs from the other companies on the same cost center
 
 ### Formulas
