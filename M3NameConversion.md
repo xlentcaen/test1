@@ -96,6 +96,29 @@ FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
     INNER JOIN [Staging_ERP].[dbo].[OOHEAD] AS [OH] ON [OL].[OBCONO] = [OH].[OACONO] AND [OL].[OBDIVI] = [OH].[OADIVI] AND [OL].[OBORST] = [OH].[OAORST]
 ```
 
+## Example 3
+### Friendly input
+```sql
+SELECT
+    [OL].[Company],
+    [OL].[Facility],
+    [OL].[Warehouse],
+    [OH].[Customer order number]
+FROM [Staging_ERP].[dbo].[Customer order, lines] AS [OL]
+    INNER JOIN [Staging_ERP].[dbo].[Customer order, head] AS [OH] ON [OL].[Company] = [OH].[Company] AND [OL].[Division] = [OH].[Division] AND [OL].[Customer order number] = [OH].[Customer order number]
+```
+
+### Converted M3-style input
+```sql
+SELECT
+    [OL].[OBCONO] AS [Company],
+    [OL].[OBFACI] AS [Facility],
+    [OL].[OBWHLO] AS [Warehouse],
+    [OH].[OAORST] AS [Customer order number]
+FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
+    INNER JOIN [Staging_ERP].[dbo].[OOHEAD] AS [OH] ON [OL].[OBCONO] = [OH].[OACONO] AND [OL].[OBDIVI] = [OH].[OADIVI] AND [OL].[OBORST] = [OH].[OAORST]
+```
+
 ## Conversion Rules
 - Friendly business table names must be mapped to M3 table names.
 - M3 table names are technical identifiers such as `MITMAS`, `OOLINE`, `OOHEAD`, `ODLINE`, `ODHEAD`, and `MHDISH`.
@@ -104,6 +127,7 @@ FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
 - The same friendly field name may map to different M3 technical names depending on the table.
 - SQL structure must remain unchanged except for name conversion.
 - Database name, schema name, aliases, joins, filters, and SQL keywords must be preserved.
+- In the `SELECT` statement, output aliases should always be kept when present.
 - Unknown names should be flagged or left unchanged depending on system rules.
 - Delivery customer order line fields in `ODLINE` typically start with `UB`.
 - Delivery customer order head fields in `ODHEAD` typically start with `UA`.
