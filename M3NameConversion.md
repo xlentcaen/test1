@@ -68,7 +68,9 @@ SELECT
     [OL].[Warehouse],
     [OH].[Customer order number]
 FROM [Staging_ERP].[dbo].[Customer order, lines] AS [OL]
-    INNER JOIN [Staging_ERP].[dbo].[Customer order, head] AS [OH] ON [OL].[Company] = [OH].[Company] AND [OL].[Division] = [OH].[Division] AND [OL].[Customer order number] = [OH].[Customer order number]
+    INNER JOIN [Staging_ERP].[dbo].[Customer order, head] AS [OH] ON [OL].[Company] = [OH].[Company]
+    AND [OL].[Division] = [OH].[Division]
+    AND [OL].[Customer order number] = [OH].[Customer order number]
 ```
 
 ### Converted M3-style input
@@ -79,7 +81,9 @@ SELECT
     [OL].[OBWHLO] AS [Warehouse],
     [OH].[OAORST] AS [Customer order number]
 FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
-    INNER JOIN [Staging_ERP].[dbo].[OOHEAD] AS [OH] ON [OL].[OBCONO] = [OH].[OACONO] AND [OL].[OBDIVI] = [OH].[OADIVI] AND [OL].[OBORST] = [OH].[OAORST]
+    INNER JOIN [Staging_ERP].[dbo].[OOHEAD] AS [OH] ON [OL].[OBCONO] = [OH].[OACONO] --[Company]
+    AND [OL].[OBDIVI] = [OH].[OADIVI] --[Division]
+    AND [OL].[OBORST] = [OH].[OAORST] --[Customer order number]
 ```
 
 ## Conversion Rules
