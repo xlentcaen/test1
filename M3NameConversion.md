@@ -58,45 +58,8 @@ The SQL conversion logic should use the MDP database and/or CSV files as the pri
 - If the same user-friendly column name exists in multiple tables, table context must decide the correct technical name.
 - If no mapping exists in the CSV files, the identifier should either remain unchanged or be flagged for review.
 
-## Example 1
-### Friendly input
-```sql
-SELECT [Item number], [Item Description]
-FROM [Item Master]
-WHERE [Item number] = 'A100'
-```
 
-### Converted M3-style input
-```sql
-SELECT MMITNO, MMITDS
-FROM MITMAS
-WHERE MMITNO = 'A100'
-```
-
-## Example 2
-### Friendly input
-```sql
-SELECT
-    [OL].[Company],
-    [OL].[Facility],
-    [OL].[Warehouse],
-    [OH].[Customer order number]
-FROM [Staging_ERP].[dbo].[Customer order, lines] AS [OL]
-    INNER JOIN [Staging_ERP].[dbo].[Customer order, head] AS [OH] ON [OL].[Company] = [OH].[Company] AND [OL].[Division] = [OH].[Division] AND [OL].[Customer order number] = [OH].[Customer order number]
-```
-
-### Converted M3-style input
-```sql
-SELECT
-    [OL].[OBCONO],
-    [OL].[OBFACI],
-    [OL].[OBWHLO],
-    [OH].[OAORST]
-FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
-    INNER JOIN [Staging_ERP].[dbo].[OOHEAD] AS [OH] ON [OL].[OBCONO] = [OH].[OACONO] AND [OL].[OBDIVI] = [OH].[OADIVI] AND [OL].[OBORST] = [OH].[OAORST]
-```
-
-## Example 3
+## Example
 ### Friendly input
 ```sql
 SELECT
