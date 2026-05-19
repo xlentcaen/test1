@@ -10,13 +10,26 @@ Examples:
 - `MITMAS` = [Item Master]
 - `OOLINE` = [Customer order, lines]
 - `OOHEAD` = [Customer order, head]
+- `ODLINE` = [Delivery customer order, line]
+- `ODHEAD` = [Delivery customer order, head]
+- `MHDISH` = [Delivery numbers]
 
 The user-friendly names referred to in this document are the MDP names. MDP is M3's own user-friendly naming convention for tables and fields.
+
+The user-friendly names referred to in this document are also known as MDP-names.
+
+Translations between MDP-names and technical M3 names can be looked up in an MDP database. This database can be used to resolve:
+- user-friendly MDP table names to technical M3 table names
+- user-friendly MDP field names to technical M3 field names
+- context-specific mappings where the same MDP-name may translate differently depending on table or usage context
 
 SQL written by users may refer to business concepts such as:
 - [Item Master]
 - [Customer order, lines]
 - [Customer order, head]
+- [Delivery customer order, line]
+- [Delivery customer order, head]
+- [Delivery numbers]
 - [Warehouse]
 
 These should be translated into the corresponding M3 table and field names before execution or processing.
@@ -25,16 +38,17 @@ These should be translated into the corresponding M3 table and field names befor
 Enable submission of SQL queries using user-friendly names and convert them into SQL using M3 technical table names and column names.
 
 ## Mapping Source
-The source of truth for mappings between M3 technical names and user-friendly names is stored in the following files:
+The source of truth for mappings between M3 technical names and user-friendly MDP-names may be stored in:
+- an MDP database
 - `M3 Vocabulary -columns1.csv`
 - `M3 Vocabulary -columns2.csv`
 
-These CSV files contain the vocabulary used to translate between:
-- user-friendly table names and M3 technical table names
-- user-friendly column names and M3 technical column names
+These sources contain the vocabulary used to translate between:
+- user-friendly MDP table names and M3 technical table names
+- user-friendly MDP column names and M3 technical column names
 - table-specific field mappings where the same friendly name may map differently depending on context
 
-The SQL conversion logic should use these CSV files as the primary mapping source.
+The SQL conversion logic should use the MDP database and/or CSV files as the primary mapping source, depending on the available implementation.
 
 ## How CSV Mappings Are Used
 - Load mappings from both CSV files before query conversion begins.
@@ -84,13 +98,15 @@ FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
 
 ## Conversion Rules
 - Friendly business table names must be mapped to M3 table names.
-- M3 table names are technical identifiers such as `MITMAS`, `OOLINE`, and `OOHEAD`.
+- M3 table names are technical identifiers such as `MITMAS`, `OOLINE`, `OOHEAD`, `ODLINE`, `ODHEAD`, and `MHDISH`.
 - Friendly field names must be mapped to M3 field names.
 - Field mappings should be resolved in the context of the selected table alias.
 - The same friendly field name may map to different M3 technical names depending on the table.
 - SQL structure must remain unchanged except for name conversion.
 - Database name, schema name, aliases, joins, filters, and SQL keywords must be preserved.
 - Unknown names should be flagged or left unchanged depending on system rules.
+- Delivery customer order line fields in `ODLINE` typically start with `UB`.
+- Delivery customer order head fields in `ODHEAD` typically start with `UA`.
 
 ## Conversion Logic
 The conversion process should take a SQL query written with user-friendly table names and column names and translate it into a SQL query that uses M3 technical table and field names.
@@ -118,6 +134,9 @@ Examples:
 - `[Item Master]` → `MITMAS`
 - `[Customer order, lines]` → `OOLINE`
 - `[Customer order, head]` → `OOHEAD`
+- `[Delivery customer order, line]` → `ODLINE`
+- `[Delivery customer order, head]` → `ODHEAD`
+- `[Delivery numbers]` → `MHDISH`
 
 Table aliases must be preserved.
 
@@ -134,6 +153,10 @@ Examples:
 - `[OH].[Company]` → `[OH].[OACONO]`
 
 This is important because the same friendly column name may map to different technical names depending on the table.
+
+For delivery customer order tables:
+- fields mapped for `ODLINE` should resolve to technical names that typically begin with `UB`
+- fields mapped for `ODHEAD` should resolve to technical names that typically begin with `UA`
 
 ### Step 4: Replace identifiers
 Replace only mapped table names and column names.
@@ -171,6 +194,9 @@ The preferred behavior should be configurable.
 | [Item Description] | MMITDS | Field | MITMAS |
 | [Customer order, lines] | OOLINE | Table | General |
 | [Customer order, head] | OOHEAD | Table | General |
+| [Delivery customer order, line] | ODLINE | Table | General |
+| [Delivery customer order, head] | ODHEAD | Table | General |
+| [Delivery numbers] | MHDISH | Table | General |
 | [Company] | OBCONO | Field | OOLINE |
 | [Company] | OACONO | Field | OOHEAD |
 | [Facility] | OBFACI | Field | OOLINE |
@@ -179,6 +205,8 @@ The preferred behavior should be configurable.
 | [Division] | OADIVI | Field | OOHEAD |
 | [Customer order number] | OBORST | Field | OOLINE |
 | [Customer order number] | OAORST | Field | OOHEAD |
+| [Delivery customer order fields] | UB* | Field Prefix | ODLINE |
+| [Delivery customer order fields] | UA* | Field Prefix | ODHEAD |
 
 ## Notes
 - M3 fields are often prefixed in a way that relates to the table structure.
@@ -187,6 +215,9 @@ The preferred behavior should be configurable.
 - A central mapping dictionary is recommended.
 - Query conversion should work for SELECT lists, FROM clauses, JOIN clauses, WHERE conditions, and other SQL expressions where mapped identifiers are used.
 - The mapping dictionary should be generated from the CSV vocabulary files.
+- For delivery customer order tables, field prefixes can help validate the result:
+  - `ODLINE` fields typically begin with `UB`
+  - `ODHEAD` fields typically begin with `UA`
 
 ## Future Enhancements
 - Support aliases
