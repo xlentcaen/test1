@@ -61,6 +61,8 @@ The SQL conversion logic should use the MDP database and/or CSV files as the pri
 - When converting a query, first resolve tables, then resolve columns using the mapped table context.
 - If the same user-friendly column name exists in multiple tables, table context must decide the correct technical name.
 - If no mapping exists in the CSV files, the identifier should either remain unchanged or be flagged for review.
+- Some tables store the key for an entity, while the related descriptive text is stored in `CSYTAB`.
+- `CSYTAB` should therefore be treated as a shared text holder for many entities in the system.
 
 
 ## Example
@@ -113,6 +115,7 @@ FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
 - Delivery customer order head fields in `ODHEAD` typically start with `UA`.
 - Customer address fields in `OCUSAD` typically start with `OP`.
 - System tables file fields in `CSYTAB` include mappings such as `[Description]` → `CTTX40`.
+- `CSYTAB` often stores descriptive text values for keys that originate in other tables.
 
 ## Conversion Logic
 The conversion process should take a SQL query written with user-friendly table names and column names and translate it into a SQL query that uses M3 technical table and field names.
@@ -175,6 +178,7 @@ For customer address tables:
 For system tables file:
 - fields mapped for `CSYTAB` should resolve using the `CSYTAB` field mappings from the mapping source
 - for example, `[Description]` maps to `CTTX40`
+- `CSYTAB` may need to be used when a source table contains a code or key, but the descriptive text is stored separately in `CSYTAB`
 
 ### Step 4: Replace identifiers
 Replace only mapped table names and column names.
@@ -244,6 +248,7 @@ The preferred behavior should be configurable.
 - For customer address tables, field prefixes can help validate the result:
   - `OCUSAD` fields typically begin with `OP`
 - For system tables file, fields should be resolved using the `CSYTAB` mapping context.
+- `CSYTAB` is often used as a shared text repository where many other tables store the key, while the descriptive text is stored in `CSYTAB`.
 
 ## Future Enhancements
 - Support aliases
