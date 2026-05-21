@@ -2,6 +2,8 @@
 
 ## Purpose
 Convert SQL queries written with M3 MDP (Metadata Publisher) naming standard into technical M3 names (Usually six characters in tables and columns). The MDP names are also referred to "user-friendly" [...]
+The input is in MDP-format and the output is in technical M3 names.
+
 
 ## M3 Naming
 In M3, table names are technical identifiers and are typically 6 characters long.
@@ -40,7 +42,7 @@ SQL written by users may refer to business concepts such as:
 These should be translated into the corresponding M3 table and field names before execution or processing.
 
 ## Goal
-Enable submission of SQL queries using user-friendly names and convert them into SQL using M3 technical table names and column names.
+Enable submission of SQL queries using user-friendly names and convert them into SQL using M3 technical table names and column names as output.
 
 ## Mapping Source
 The source of truth for mappings between M3 technical names and user-friendly MDP-names may be stored in:
@@ -71,6 +73,9 @@ The SQL conversion logic should use the MDP database and/or CSV files as the pri
 
 
 ## Example
+Follow the convention in naming and commenting strictly according to the example below.
+
+
 ### User-Friendly (MDP -Metadata Publisher) input
 ```sql
 SELECT
@@ -89,7 +94,7 @@ FROM [Staging_ERP].[dbo].[Customer order, lines] AS [OL]
 
 ```
 
-### Converted M3-style input
+### Converted M3-style output
 ```sql
 SELECT
     [OL].[OBCONO] AS [Company],
@@ -99,8 +104,9 @@ SELECT
 	[OL].[OBORQT] AS [Ordered quantity - basic U/M],
 	[OL].[OBORQT] AS [Ordered quantity - basic U/M - Customer Order Qty],
 	[OL].[OBORQT] - [OL].[OBDLQT] AS [My Calculation Remaining]
-FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
-    INNER JOIN [Staging_ERP].[dbo].[OOHEAD] AS [OH] ON [OL].[OBCONO] = [OH].[OACONO] --[Company]
+FROM [Staging_ERP].[dbo].[OOLINE] AS [OL] --[Customer order, lines]
+    INNER JOIN [Staging_ERP].[dbo].[OOHEAD] AS [OH] --[Customer order, head]
+	ON [OL].[OBCONO] = [OH].[OACONO] --[Company]
     AND [OL].[OBDIVI] = [OH].[OADIVI] --[Division]
     AND [OL].[OBORST] = [OH].[OAORST] --[Customer order number]
 	AND [OL].[OBORST] = 77 --[Highest status - customer order]
