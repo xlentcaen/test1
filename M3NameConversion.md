@@ -1,7 +1,7 @@
 # M3 Name Conversion
 
 ## Purpose
-Convert SQL queries written with M3 MDP (Metadata Publisher) naming standard into technical M3 names (Usually six characters in tables and columns). The MDP names are also referred to "user-friendly" or "business" names.
+Convert SQL queries written with M3 MDP (Metadata Publisher) naming standard into technical M3 names (Usually six characters in tables and columns). The MDP names are also referred to "user-friendly" [...]
 
 ## M3 Naming
 In M3, table names are technical identifiers and are typically 6 characters long.
@@ -12,6 +12,7 @@ Examples:
 - `OOHEAD` = [Customer order, head]
 - `ODLINE` = [Delivery customer order, line]
 - `ODHEAD` = [Delivery customer order, head]
+- `OCUSAD` = [Customer address]
 - `MHDISH` = [Delivery numbers]
 
 The user-friendly names referred to in this document are the MDP names. MDP is M3's own user-friendly naming convention for tables and fields.
@@ -29,6 +30,7 @@ SQL written by users may refer to business concepts such as:
 - [Customer order, head]
 - [Delivery customer order, line]
 - [Delivery customer order, head]
+- [Customer address]
 - [Delivery numbers]
 - [Warehouse]
 
@@ -97,7 +99,7 @@ FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
 
 ## Conversion Rules
 - Friendly business table names must be mapped to M3 table names.
-- M3 table names are technical identifiers such as `MITMAS`, `OOLINE`, `OOHEAD`, `ODLINE`, `ODHEAD`, and `MHDISH`.
+- M3 table names are technical identifiers such as `MITMAS`, `OOLINE`, `OOHEAD`, `ODLINE`, `ODHEAD`, `OCUSAD`, and `MHDISH`.
 - Friendly field names must be mapped to M3 field names.
 - Field mappings should be resolved in the context of the selected table alias.
 - The same friendly field name may map to different M3 technical names depending on the table.
@@ -107,6 +109,7 @@ FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
 - Unknown names should be flagged or left unchanged depending on system rules.
 - Delivery customer order line fields in `ODLINE` typically start with `UB`.
 - Delivery customer order head fields in `ODHEAD` typically start with `UA`.
+- Customer address fields in `OCUSAD` typically start with `OP`.
 
 ## Conversion Logic
 The conversion process should take a SQL query written with user-friendly table names and column names and translate it into a SQL query that uses M3 technical table and field names.
@@ -136,6 +139,7 @@ Examples:
 - `[Customer order, head]` → `OOHEAD`
 - `[Delivery customer order, line]` → `ODLINE`
 - `[Delivery customer order, head]` → `ODHEAD`
+- `[Customer address]` → `OCUSAD`
 - `[Delivery numbers]` → `MHDISH`
 
 Table aliases must be preserved.
@@ -151,12 +155,17 @@ For each column reference, use the table alias and mapped table name to determin
 Examples:
 - `[OL].[Company]` → `[OL].[OBCONO]`
 - `[OH].[Company]` → `[OH].[OACONO]`
+- `[CA].[Customer Number]` → `[CA].[OPCUNO]`
 
 This is important because the same friendly column name may map to different technical names depending on the table.
 
 For delivery customer order tables:
 - fields mapped for `ODLINE` should resolve to technical names that typically begin with `UB`
 - fields mapped for `ODHEAD` should resolve to technical names that typically begin with `UA`
+
+For customer address tables:
+- fields mapped for `OCUSAD` should resolve to technical names that typically begin with `OP`
+- for example, `[Customer Number]` maps to `OPCUNO`
 
 ### Step 4: Replace identifiers
 Replace only mapped table names and column names.
@@ -196,6 +205,7 @@ The preferred behavior should be configurable.
 | [Customer order, head] | OOHEAD | Table | General |
 | [Delivery customer order, line] | ODLINE | Table | General |
 | [Delivery customer order, head] | ODHEAD | Table | General |
+| [Customer address] | OCUSAD | Table | General |
 | [Delivery numbers] | MHDISH | Table | General |
 | [Company] | OBCONO | Field | OOLINE |
 | [Company] | OACONO | Field | OOHEAD |
@@ -205,8 +215,10 @@ The preferred behavior should be configurable.
 | [Division] | OADIVI | Field | OOHEAD |
 | [Customer order number] | OBORST | Field | OOLINE |
 | [Customer order number] | OAORST | Field | OOHEAD |
+| [Customer Number] | OPCUNO | Field | OCUSAD |
 | [Delivery customer order fields] | UB* | Field Prefix | ODLINE |
 | [Delivery customer order fields] | UA* | Field Prefix | ODHEAD |
+| [Customer address fields] | OP* | Field Prefix | OCUSAD |
 
 ## Notes
 - M3 fields are often prefixed in a way that relates to the table structure.
@@ -218,6 +230,8 @@ The preferred behavior should be configurable.
 - For delivery customer order tables, field prefixes can help validate the result:
   - `ODLINE` fields typically begin with `UB`
   - `ODHEAD` fields typically begin with `UA`
+- For customer address tables, field prefixes can help validate the result:
+  - `OCUSAD` fields typically begin with `OP`
 
 ## Future Enhancements
 - Support aliases
