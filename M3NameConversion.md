@@ -13,6 +13,7 @@ Examples:
 - `ODLINE` = [Delivery customer order, line]
 - `ODHEAD` = [Delivery customer order, head]
 - `OCUSAD` = [Customer address]
+- `CSYTAB` = [System tables file]
 - `MHDISH` = [Delivery numbers]
 
 The user-friendly names referred to in this document are the MDP names. MDP is M3's own user-friendly naming convention for tables and fields.
@@ -31,6 +32,7 @@ SQL written by users may refer to business concepts such as:
 - [Delivery customer order, line]
 - [Delivery customer order, head]
 - [Customer address]
+- [System tables file]
 - [Delivery numbers]
 - [Warehouse]
 
@@ -99,7 +101,7 @@ FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
 
 ## Conversion Rules
 - Friendly business table names must be mapped to M3 table names.
-- M3 table names are technical identifiers such as `MITMAS`, `OOLINE`, `OOHEAD`, `ODLINE`, `ODHEAD`, `OCUSAD`, and `MHDISH`.
+- M3 table names are technical identifiers such as `MITMAS`, `OOLINE`, `OOHEAD`, `ODLINE`, `ODHEAD`, `OCUSAD`, `CSYTAB`, and `MHDISH`.
 - Friendly field names must be mapped to M3 field names.
 - Field mappings should be resolved in the context of the selected table alias.
 - The same friendly field name may map to different M3 technical names depending on the table.
@@ -110,6 +112,7 @@ FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
 - Delivery customer order line fields in `ODLINE` typically start with `UB`.
 - Delivery customer order head fields in `ODHEAD` typically start with `UA`.
 - Customer address fields in `OCUSAD` typically start with `OP`.
+- System tables file fields in `CSYTAB` include mappings such as `[Description]` → `CTTX40`.
 
 ## Conversion Logic
 The conversion process should take a SQL query written with user-friendly table names and column names and translate it into a SQL query that uses M3 technical table and field names.
@@ -140,6 +143,7 @@ Examples:
 - `[Delivery customer order, line]` → `ODLINE`
 - `[Delivery customer order, head]` → `ODHEAD`
 - `[Customer address]` → `OCUSAD`
+- `[System tables file]` → `CSYTAB`
 - `[Delivery numbers]` → `MHDISH`
 
 Table aliases must be preserved.
@@ -156,6 +160,7 @@ Examples:
 - `[OL].[Company]` → `[OL].[OBCONO]`
 - `[OH].[Company]` → `[OH].[OACONO]`
 - `[CA].[Customer Number]` → `[CA].[OPCUNO]`
+- `[ST].[Description]` → `[ST].[CTTX40]`
 
 This is important because the same friendly column name may map to different technical names depending on the table.
 
@@ -166,6 +171,10 @@ For delivery customer order tables:
 For customer address tables:
 - fields mapped for `OCUSAD` should resolve to technical names that typically begin with `OP`
 - for example, `[Customer Number]` maps to `OPCUNO`
+
+For system tables file:
+- fields mapped for `CSYTAB` should resolve using the `CSYTAB` field mappings from the mapping source
+- for example, `[Description]` maps to `CTTX40`
 
 ### Step 4: Replace identifiers
 Replace only mapped table names and column names.
@@ -206,6 +215,7 @@ The preferred behavior should be configurable.
 | [Delivery customer order, line] | ODLINE | Table | General |
 | [Delivery customer order, head] | ODHEAD | Table | General |
 | [Customer address] | OCUSAD | Table | General |
+| [System tables file] | CSYTAB | Table | General |
 | [Delivery numbers] | MHDISH | Table | General |
 | [Company] | OBCONO | Field | OOLINE |
 | [Company] | OACONO | Field | OOHEAD |
@@ -216,6 +226,7 @@ The preferred behavior should be configurable.
 | [Customer order number] | OBORST | Field | OOLINE |
 | [Customer order number] | OAORST | Field | OOHEAD |
 | [Customer Number] | OPCUNO | Field | OCUSAD |
+| [Description] | CTTX40 | Field | CSYTAB |
 | [Delivery customer order fields] | UB* | Field Prefix | ODLINE |
 | [Delivery customer order fields] | UA* | Field Prefix | ODHEAD |
 | [Customer address fields] | OP* | Field Prefix | OCUSAD |
@@ -232,6 +243,7 @@ The preferred behavior should be configurable.
   - `ODHEAD` fields typically begin with `UA`
 - For customer address tables, field prefixes can help validate the result:
   - `OCUSAD` fields typically begin with `OP`
+- For system tables file, fields should be resolved using the `CSYTAB` mapping context.
 
 ## Future Enhancements
 - Support aliases
