@@ -68,6 +68,7 @@ SELECT
     [OL].[Warehouse],
     [OH].[Customer order number],
 	[OL].[Ordered quantity - basic U/M],
+	[OL].[Ordered quantity - basic U/M] [Customer Order Qty],
 	[OL].[Ordered quantity - basic U/M] - [OL].[Delivered quantity - basic U/M] [My Calculation Remaining]
 FROM [Staging_ERP].[dbo].[Customer order, lines] AS [OL]
     INNER JOIN [Staging_ERP].[dbo].[Customer order, head] AS [OH] ON [OL].[Company] = [OH].[Company]
@@ -85,6 +86,7 @@ SELECT
     [OL].[OBWHLO] AS [Warehouse],
     [OH].[OAORST] AS [Customer order number],
 	[OL].[OBORQT] AS [Ordered quantity - basic U/M],
+	[OL].[OBORQT] AS [Ordered quantity - basic U/M -- Customer Order Qty],
 	[OL].[OBORQT] - [OL].[OBDLQT] AS [My Calculation Remaining]
 FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
     INNER JOIN [Staging_ERP].[dbo].[OOHEAD] AS [OH] ON [OL].[OBCONO] = [OH].[OACONO] --[Company]
