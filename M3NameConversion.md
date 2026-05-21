@@ -35,6 +35,7 @@ SQL written by users may refer to business concepts such as:
 - [System tables file]
 - [Delivery numbers]
 - [Warehouse]
+- [... CodeTable]
 
 These should be translated into the corresponding M3 table and field names before execution or processing.
 
@@ -51,6 +52,7 @@ These sources contain the vocabulary used to translate between:
 - user-friendly MDP table names and M3 technical table names
 - user-friendly MDP column names and M3 technical column names
 - table-specific field mappings where the same friendly name may map differently depending on context
+- logical `... CodeTable` view names that resolve to `CSYTAB` while retaining their own column naming context
 
 The SQL conversion logic should use the MDP database and/or CSV files as the primary mapping source, depending on the available implementation.
 
@@ -63,6 +65,9 @@ The SQL conversion logic should use the MDP database and/or CSV files as the pri
 - If no mapping exists in the CSV files, the identifier should either remain unchanged or be flagged for review.
 - Some tables store the key for an entity, while the related descriptive text is stored in `CSYTAB`.
 - `CSYTAB` should therefore be treated as a shared text holder for many entities in the system.
+- Submitted SQL may reference `... CodeTable` names that do not physically exist in the MDP library.
+- These `... CodeTable` names should be treated as logical views over `CSYTAB`.
+- A `... CodeTable` view resolves to `CSYTAB` for the technical table name, but keeps its own friendly column names for mapping purposes.
 
 
 ## Example
@@ -116,6 +121,8 @@ FROM [Staging_ERP].[dbo].[OOLINE] AS [OL]
 - Customer address fields in `OCUSAD` typically start with `OP`.
 - System tables file fields in `CSYTAB` include mappings such as `[Description]` → `CTTX40`.
 - `CSYTAB` often stores descriptive text values for keys that originate in other tables.
+- Submitted SQL may reference `... CodeTable` names that do not exist as physical MDP tables.
+- These `... CodeTable` names must resolve to `CSYTAB`, while their column mappings remain specific to the logical CodeTable view.
 
 ## Conversion Logic
 The conversion process should take a SQL query written with user-friendly table names and column names and translate it into a SQL query that uses M3 technical table and field names.
@@ -147,6 +154,7 @@ Examples:
 - `[Delivery customer order, head]` → `ODHEAD`
 - `[Customer address]` → `OCUSAD`
 - `[System tables file]` → `CSYTAB`
+- `[Status CodeTable]` → `CSYTAB`
 - `[Delivery numbers]` → `MHDISH`
 
 Table aliases must be preserved.
@@ -179,6 +187,12 @@ For system tables file:
 - fields mapped for `CSYTAB` should resolve using the `CSYTAB` field mappings from the mapping source
 - for example, `[Description]` maps to `CTTX40`
 - `CSYTAB` may need to be used when a source table contains a code or key, but the descriptive text is stored separately in `CSYTAB`
+
+For `... CodeTable` references:
+- a submitted `... CodeTable` name may not exist as a physical table in the MDP library
+- the table name should still resolve to `CSYTAB`
+- the column mappings should be resolved using the specific logical CodeTable/view context, not only the base `CSYTAB` context
+- this allows a CodeTable view to expose its own friendly column names while still being backed by `CSYTAB`
 
 ### Step 4: Replace identifiers
 Replace only mapped table names and column names.
@@ -220,6 +234,7 @@ The preferred behavior should be configurable.
 | [Delivery customer order, head] | ODHEAD | Table | General |
 | [Customer address] | OCUSAD | Table | General |
 | [System tables file] | CSYTAB | Table | General |
+| [... CodeTable] | CSYTAB | Logical View/Table | CodeTable context |
 | [Delivery numbers] | MHDISH | Table | General |
 | [Company] | OBCONO | Field | OOLINE |
 | [Company] | OACONO | Field | OOHEAD |
@@ -249,6 +264,8 @@ The preferred behavior should be configurable.
   - `OCUSAD` fields typically begin with `OP`
 - For system tables file, fields should be resolved using the `CSYTAB` mapping context.
 - `CSYTAB` is often used as a shared text repository where many other tables store the key, while the descriptive text is stored in `CSYTAB`.
+- `... CodeTable` references in submitted SQL may represent logical views over `CSYTAB` even when no physical MDP table exists with that name.
+- Those logical CodeTable names should keep their own column naming context during field resolution.
 
 ## Future Enhancements
 - Support aliases
