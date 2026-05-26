@@ -232,3 +232,115 @@ WHERE OH.OAORDT >= 20260501;
 - Replaced `N''` and `N'N/A'` Unicode string literals with standard string literals.
 - Preserved the original database/schema/table naming pattern as `STAGING_ERP.DBO.TABLE_NAME`; adjust object names if your Snowflake database and schema names differ.
 - If columns such as `OAORDT`, `UAIVDT`, or `OQDSDT` are stored as numeric date keys rather than true DATE values, you may want to cast/convert them separately in Snowflake.
+
+---
+
+## Snowflake SQL Example 2
+
+```sql
+SELECT
+    1 AS "IC_type",
+    TRIM(OL.PROJ) AS "Project element",
+    OL.CONO AS "Company",
+    OL.FACI AS "Facility",
+    OL.WHLO AS "Warehouse",
+    COALESCE(DOL.PONR, OL.PONR) AS "Line number",
+    COALESCE(DOL.POSX, OL.POSX) AS "Line suffix",
+    COALESCE(DOL.DLIX, '0') AS "Delivery number",
+    '' AS "Receiving DC",
+    OL.ORNO AS "Customer order number",
+    OL.CUNO AS "Customer number",
+    DOH.IVNO AS "Invoice number",
+    DOH.IVDT AS "Invoice date",
+    DH.DSDT AS "Departure date",
+    DH.FWNO AS "Forwarding agent",
+    OL.ITNO AS "Item number",
+    IM.ITGR AS "Item group",
+    ST.TX40 AS "Item group description",
+    IM.ITDS AS "ItemName",
+    IM.FUDS AS "Description",
+    OL.ORQT AS "Ordered quantity - basic U/M",
+    OL.DLQT AS "Delivered quantity - basic U/M",
+    OL.IVQT AS "Invoiced quantity - basic U/M",
+    IFNULL(OH.CUCD, 'N/A') AS "Currency",
+    OL.SAPR AS "Sales price",
+    AU.ALUN AS "Alternate U/M",
+    OL.DIP1 + OL.DIP2 + OL.DIP3 AS "tot discount",
+    0 AS "discount",
+    CASE
+        WHEN OL.ORST < 66 THEN OL.LNAM
+        ELSE DOL.LNAM
+    END AS "NetLineAmount",
+    OL.COFS AS "Package content",
+    OL.SPUN AS "Package unit",
+    OL.ORQT AS "Number of packages",
+    0 AS "Standard cost",
+    0 AS "Average cost",
+    OH.ORTP AS "Customer order type",
+    OL.ADID AS "Address number",
+    DH.CONN AS "Shipment",
+    DH.VOL3 AS "Packed volume",
+    DH.ROUT AS "Route",
+    OL.MODL AS "Delivery method",
+    CU.CUNM AS "Customer name",
+    CU.ADID AS "Customer address number",
+    CU.CUA1 AS "Address line 1",
+    CU.CUA2 AS "Address line 2",
+    CU.CUA3 AS "Address line 3",
+    CU.CUA4 AS "Address line 4",
+    CU.TOWN AS "City",
+    CU.CSCD AS "Country",
+    country.TX40 AS "Country Description",
+    OL.COFA AS "package content2",
+    OL.COFA AS "package content3",
+    IM.UNMS AS "Basic unit of measure",
+    OL.ORQT * AU.COFA AS "Number of packages2"
+FROM M3_OOLINE AS OL
+INNER JOIN M3_OOHEAD AS OH
+    ON OL.CONO = OH.CONO
+   AND OL.DIVI = OH.DIVI
+   AND OL.ORNO = OH.ORNO
+LEFT JOIN M3_ODLINE AS DOL
+    ON OL.CONO = DOL.CONO
+   AND OL.DIVI = DOL.DIVI
+   AND OL.ORNO = DOL.ORNO
+   AND OL.PONR = DOL.PONR
+   AND OL.POSX = DOL.POSX
+LEFT JOIN M3_ODHEAD AS DOH
+    ON OL.CONO = DOH.CONO
+   AND OL.DIVI = DOH.DIVI
+   AND OL.ORNO = DOH.ORNO
+   AND DOL.DLIX = DOH.DLIX
+LEFT JOIN M3_MITMAS AS IM
+    ON OL.CONO = IM.CONO
+   AND OL.ITNO = IM.ITNO
+LEFT JOIN M3_CSYTAB AS ST
+    ON IM.CONO = ST.CONO
+   AND IM.ITGR = ST.STKY
+LEFT JOIN M3_MHDISH AS DH
+    ON DOH.CONO = DH.CONO
+   AND DOH.DLIX = DH.DLIX
+   AND DH.INOU = 1
+LEFT JOIN M3_OCUSAD AS CU
+    ON OL.CONO = CU.CONO
+   AND OL.CUNO = CU.CUNO
+   AND OL.ADID = CU.ADID
+   AND CU.ADRT = 1
+LEFT JOIN M3_CSYTAB AS country
+    ON country.CONO = OL.CONO
+   AND country.STKY = CU.CSCD
+LEFT JOIN M3_MITAUN AS AU
+    ON OL.CONO = AU.CONO
+   AND OL.ITNO = AU.ITNO
+   AND AU.AUS9 = 1
+WHERE OH.ORDT >= 20250501;
+```
+
+## Notes for Example 2
+
+- This query is already very close to Snowflake syntax.
+- `IFNULL(...)` is valid in Snowflake, so no change was required.
+- Double-quoted aliases are valid in Snowflake and were preserved.
+- Table aliases like `"OH"` and `"country"` were normalized to unquoted aliases for readability.
+- If `ST` and `country` are code tables requiring additional filters such as a code type column, you may want to add those predicates explicitly.
+- If `ORDT`, `IVDT`, or `DSDT` are stored as numeric YYYYMMDD values, consider converting them with `TO_DATE(TO_VARCHAR(column), 'YYYYMMDD')`.
