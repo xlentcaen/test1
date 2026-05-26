@@ -1,82 +1,44 @@
 # M3 Name Conversion
 
 ## Purpose
-Convert SQL queries written with M3 MDP (Metadata Publisher) naming standard into technical M3 names (Usually six characters in tables and columns). The MDP names are also referred to "user-friendly" [...]
-The input is in MDP-format and the output is in technical M3 names.
+Convert SQL queries written with M3 MDP (Metadata Publisher) user-friendly names into technical M3 names (typically 6-character identifiers for tables and columns).
 
-## Critical instructions
-Follow the convention in naming and commenting strictly according to the example below.
-Never guess column names when unsure ask me and I'll input the column name.
-
+## Critical Instructions
+- Follow the naming and commenting convention strictly as shown in the example below.
+- Never guess column names — ask if unsure and the column name will be provided.
 
 ## M3 Naming
-In M3, table names are technical identifiers and are typically 6 characters long.
+M3 table and field names are short technical identifiers, typically 6 characters long. MDP (Metadata Publisher) is M3's own user-friendly naming layer for tables and fields.
 
-Examples:
-- `MITMAS` = [Item Master]
-- `OOLINE` = [Customer order, lines]
-- `OOHEAD` = [Customer order, head]
-- `ODLINE` = [Delivery customer order, line]
-- `ODHEAD` = [Delivery customer order, head]
-- `OCUSAD` = [Customer address]
-- `CSYTAB` = [System tables file]
-- `MHDISH` = [Delivery numbers]
+**Common table mappings:**
+| MDP Name | M3 Technical Name |
+|---|---|
+| [Item Master] | `MITMAS` |
+| [Customer order, lines] | `OOLINE` |
+| [Customer order, head] | `OOHEAD` |
+| [Delivery customer order, line] | `ODLINE` |
+| [Delivery customer order, head] | `ODHEAD` |
+| [Customer address] | `OCUSAD` |
+| [System tables file] | `CSYTAB` |
+| [Delivery numbers] | `MHDISH` |
 
-The user-friendly names referred to in this document are the MDP names. MDP is M3's own user-friendly naming convention for tables and fields.
-
-The user-friendly names referred to in this document are also known as MDP-names.
-
-Translations between MDP-names and technical M3 names can be looked up in an MDP database. This database can be used to resolve:
-- user-friendly MDP table names to technical M3 table names
-- user-friendly MDP field names to technical M3 field names
-- context-specific mappings where the same MDP-name may translate differently depending on table or usage context
-
-SQL written by users may refer to business concepts such as:
-- [Item Master]
-- [Customer order, lines]
-- [Customer order, head]
-- [Delivery customer order, line]
-- [Delivery customer order, head]
-- [Customer address]
-- [System tables file]
-- [Delivery numbers]
-- [Warehouse]
-- [... CodeTable]
-
-These should be translated into the corresponding M3 table and field names before execution or processing.
-
-## Goal
-Enable submission of SQL queries using user-friendly names and convert them into SQL using M3 technical table names and column names as output.
+> **Note on CSYTAB:** Many tables store a code or key while the descriptive text lives in `CSYTAB`. SQL may also reference `... CodeTable` names that do not physically exist — these are logical views over `CSYTAB` and resolve to it at runtime while keeping their own column-mapping context.
 
 ## Mapping Source
-The source of truth for mappings between M3 technical names and user-friendly MDP-names may be stored in:
-- an MDP database
+Mappings between MDP names and M3 technical names are stored in:
+- An MDP database
 - `M3 Vocabulary -columns1.csv`
 - `M3 Vocabulary -columns2.csv`
 
-These sources contain the vocabulary used to translate between:
-- user-friendly MDP table names and M3 technical table names
-- user-friendly MDP column names and M3 technical column names
-- table-specific field mappings where the same friendly name may map differently depending on context
-- logical `... CodeTable` view names that resolve to `CSYTAB` while retaining their own column naming context
-
-The SQL conversion logic should use the MDP database and/or CSV files as the primary mapping source, depending on the available implementation.
-
-## How CSV Mappings Are Used
-- Load mappings from both CSV files before query conversion begins.
+**How mappings are loaded:**
+- Load both CSV files before query conversion begins.
 - Build a dictionary for table name mappings.
-- Build a dictionary for column name mappings scoped by M3 table name.
-- When converting a query, first resolve tables, then resolve columns using the mapped table context.
-- If the same user-friendly column name exists in multiple tables, table context must decide the correct technical name.
-- If no mapping exists in the CSV files, the identifier should either remain unchanged or be flagged for review.
-- Some tables store the key for an entity, while the related descriptive text is stored in `CSYTAB`.
-- `CSYTAB` should therefore be treated as a shared text holder for many entities in the system.
-- Submitted SQL may reference `... CodeTable` names that do not physically exist in the MDP library.
-- These `... CodeTable` names should be treated as logical views over `CSYTAB`.
-- A `... CodeTable` view resolves to `CSYTAB` for the technical table name, but keeps its own friendly column names for mapping purposes.
+- Build a dictionary for column name mappings scoped by M3 table name (the same friendly name may map differently depending on context).
+- If no mapping exists, leave the identifier unchanged or flag it for review (behavior should be configurable).
 
+## Example
 
-### User-Friendly (MDP -Metadata Publisher) input
+### User-Friendly (MDP) input
 ```sql
 SELECT
     [OL].[Company],
@@ -112,121 +74,49 @@ FROM [Staging_ERP].[dbo].[OOLINE] AS [OL] --[Customer order, lines]
 	AND [OL].[OBORST] = 77 --[Highest status - customer order]
 ```
 
-## Conversion Rules
-- Friendly business table names must be mapped to M3 table names.
-- M3 table names are technical identifiers such as `MITMAS`, `OOLINE`, `OOHEAD`, `ODLINE`, `ODHEAD`, `OCUSAD`, `CSYTAB`, and `MHDISH`.
-- Friendly field names must be mapped to M3 field names.
-- Field mappings should be resolved in the context of the selected table alias.
-- The same friendly field name may map to different M3 technical names depending on the table.
-- SQL structure must remain unchanged except for name conversion.
-- Database name, schema name, aliases, joins, filters, and SQL keywords must be preserved.
-- In the `SELECT` statement, output aliases should always be kept when present.
-- Unknown names should be flagged or left unchanged depending on system rules.
-- Delivery customer order line fields in `ODLINE` typically start with `UB`.
-- Delivery customer order head fields in `ODHEAD` typically start with `UA`.
-- Customer address fields in `OCUSAD` typically start with `OP`.
-- System tables file fields in `CSYTAB` include mappings such as `[Description]` → `CTTX40`.
-- `CSYTAB` often stores descriptive text values for keys that originate in other tables.
-- Submitted SQL may reference `... CodeTable` names that do not exist as physical MDP tables.
-- These `... CodeTable` names must resolve to `CSYTAB`, while their column mappings remain specific to the logical CodeTable view.
-
 ## Conversion Logic
-The conversion process should take a SQL query written with user-friendly table names and column names and translate it into a SQL query that uses M3 technical table and field names.
 
 ### Step 1: Parse the SQL query
-Identify the main SQL parts:
-- SELECT
-- FROM
-- JOIN
-- WHERE
-- GROUP BY
-- ORDER BY
-
-The parser must also detect:
+Identify all SQL clauses (`SELECT`, `FROM`, `JOIN`, `WHERE`, `GROUP BY`, `ORDER BY`) and extract:
 - database and schema references
-- table names
-- aliases
+- table names and aliases
 - column references
 - join conditions
 
 ### Step 2: Resolve table mappings
-For each table in the query, translate the friendly table name into the corresponding M3 technical table name using the CSV mapping source.
-
-Examples:
-- `[Item Master]` → `MITMAS`
-- `[Customer order, lines]` → `OOLINE`
-- `[Customer order, head]` → `OOHEAD`
-- `[Delivery customer order, line]` → `ODLINE`
-- `[Delivery customer order, head]` → `ODHEAD`
-- `[Customer address]` → `OCUSAD`
-- `[System tables file]` → `CSYTAB`
-- `[Status CodeTable]` → `CSYTAB`
-- `[Delivery numbers]` → `MHDISH`
-
-Table aliases must be preserved.
+Translate each friendly table name to its M3 technical name using the mapping source. Preserve aliases and all other SQL structure.
 
 Example:
-- `[Staging_ERP].[dbo].[Customer order, lines] AS [OL]`
-becomes:
-- `[Staging_ERP].[dbo].[OOLINE] AS [OL]`
+```
+[Staging_ERP].[dbo].[Customer order, lines] AS [OL]
+→ [Staging_ERP].[dbo].[OOLINE] AS [OL]
+```
 
-### Step 3: Resolve column mappings using table context
-For each column reference, use the table alias and mapped table name to determine the correct M3 field name from the CSV mappings.
+`... CodeTable` names (e.g. `[Status CodeTable]`) resolve to `CSYTAB` but keep their own column-mapping context.
+
+### Step 3: Resolve column mappings
+Use the table alias + mapped table name to look up the correct M3 field name. The same friendly name may map differently per table.
 
 Examples:
-- `[OL].[Company]` → `[OL].[OBCONO]`
-- `[OH].[Company]` → `[OH].[OACONO]`
-- `[CA].[Customer Number]` → `[CA].[OPCUNO]`
-- `[ST].[Description]` → `[ST].[CTTX40]`
+- `[OL].[Company]` → `[OL].[OBCONO]` (OOLINE)
+- `[OH].[Company]` → `[OH].[OACONO]` (OOHEAD)
+- `[CA].[Customer Number]` → `[CA].[OPCUNO]` (OCUSAD)
+- `[ST].[Description]` → `[ST].[CTTX40]` (CSYTAB)
 
-This is important because the same friendly column name may map to different technical names depending on the table.
+**Field-prefix hints for validation:**
+- `ODLINE` fields → typically begin with `UB`
+- `ODHEAD` fields → typically begin with `UA`
+- `OCUSAD` fields → typically begin with `OP`
 
-For delivery customer order tables:
-- fields mapped for `ODLINE` should resolve to technical names that typically begin with `UB`
-- fields mapped for `ODHEAD` should resolve to technical names that typically begin with `UA`
+### Step 4: Replace identifiers and preserve everything else
+Replace only mapped table and column names. Leave unchanged:
+- SQL keywords, operators, literals
+- aliases, database names, schema names
+- query structure, joins, filters, sorting, grouping
+- `SELECT` output aliases (keep when present)
 
-For customer address tables:
-- fields mapped for `OCUSAD` should resolve to technical names that typically begin with `OP`
-- for example, `[Customer Number]` maps to `OPCUNO`
-
-For system tables file:
-- fields mapped for `CSYTAB` should resolve using the `CSYTAB` field mappings from the mapping source
-- for example, `[Description]` maps to `CTTX40`
-- `CSYTAB` may need to be used when a source table contains a code or key, but the descriptive text is stored separately in `CSYTAB`
-
-For `... CodeTable` references:
-- a submitted `... CodeTable` name may not exist as a physical table in the MDP library
-- the table name should still resolve to `CSYTAB`
-- the column mappings should be resolved using the specific logical CodeTable/view context, not only the base `CSYTAB` context
-- this allows a CodeTable view to expose its own friendly column names while still being backed by `CSYTAB`
-
-### Step 4: Replace identifiers
-Replace only mapped table names and column names.
-Do not change:
-- SQL keywords
-- aliases
-- database names
-- schema names
-- operators
-- literals
-- query structure
-
-### Step 5: Preserve query logic
-The converted query must keep the original logic unchanged:
-- selected columns
-- joins
-- filters
-- sorting
-- grouping
-
-Only the identifiers should change.
-
-### Step 6: Handle unknown mappings
-If a friendly name cannot be mapped from the CSV files:
-- leave it unchanged, or
-- return a warning/error for manual review
-
-The preferred behavior should be configurable.
+### Step 5: Handle unknown mappings
+If a friendly name has no mapping: leave it unchanged or flag it for review. The preferred behavior should be configurable.
 
 ## Mapping Examples
 | Friendly Name | M3 Technical Name | Type | Context |
@@ -257,23 +147,6 @@ The preferred behavior should be configurable.
 | [Delivery customer order fields] | UB* | Field Prefix | ODLINE |
 | [Delivery customer order fields] | UA* | Field Prefix | ODHEAD |
 | [Customer address fields] | OP* | Field Prefix | OCUSAD |
-
-## Notes
-- M3 fields are often prefixed in a way that relates to the table structure.
-- The same friendly field name may map differently depending on table context.
-- The user-friendly names used for conversion are MDP names, which are M3's own user-friendly labels.
-- A central mapping dictionary is recommended.
-- Query conversion should work for SELECT lists, FROM clauses, JOIN clauses, WHERE conditions, and other SQL expressions where mapped identifiers are used.
-- The mapping dictionary should be generated from the CSV vocabulary files.
-- For delivery customer order tables, field prefixes can help validate the result:
-  - `ODLINE` fields typically begin with `UB`
-  - `ODHEAD` fields typically begin with `UA`
-- For customer address tables, field prefixes can help validate the result:
-  - `OCUSAD` fields typically begin with `OP`
-- For system tables file, fields should be resolved using the `CSYTAB` mapping context.
-- `CSYTAB` is often used as a shared text repository where many other tables store the key, while the descriptive text is stored in `CSYTAB`.
-- `... CodeTable` references in submitted SQL may represent logical views over `CSYTAB` even when no physical MDP table exists with that name.
-- Those logical CodeTable names should keep their own column naming context during field resolution.
 
 ## Future Enhancements
 - Support aliases
