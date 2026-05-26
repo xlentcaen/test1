@@ -1,5 +1,8 @@
 # Convert M3-Snowflake
 
+## Purpose
+This document is intended to simplify conversion between T-SQL and Snowflake SQL syntax.
+
 ## Original T-SQL
 
 ```sql
