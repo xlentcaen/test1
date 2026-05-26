@@ -235,6 +235,8 @@ WHERE OH.OAORDT >= 20260501;
 - Replaced `N''` and `N'N/A'` Unicode string literals with standard string literals.
 - Preserved the original database/schema/table naming pattern as `STAGING_ERP.DBO.TABLE_NAME`; adjust object names if your Snowflake database and schema names differ.
 - If columns such as `OAORDT`, `UAIVDT`, or `OQDSDT` are stored as numeric date keys rather than true DATE values, you may want to cast/convert them separately in Snowflake.
+- Snowflake M3 column names should use the four-character business field name without the original two-character table prefix. For example, `OACONO` becomes `CONO`, not `OACONO`.
+- Snowflake M3 table names should use the `M3_` prefix followed by the original table name. For example, `ODHEAD` becomes `M3_ODHEAD` and `ODLINE` becomes `M3_ODLINE`.
 
 ---
 
