@@ -20,6 +20,9 @@ M3 table and field names are short technical identifiers, typically 6 characters
 | [Customer address] | `OCUSAD` |
 | [System tables file] | `CSYTAB` |
 | [Delivery numbers] | `MHDISH` |
+| [Stock transaction, line] | `MGLINE` |
+| [Stock transaction, Delivery address file] | `MGDADR` |
+
 
 > **Note on CSYTAB:** Many tables store a code or key while the descriptive text lives in `CSYTAB`. SQL may also reference `... CodeTable` names that do not physically exist — these are logical views over `CSYTAB` and resolve to it at runtime while keeping their own column-mapping context.
 
