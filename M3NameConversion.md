@@ -5,7 +5,6 @@ Convert SQL queries written with M3 MDP (Metadata Publisher) user-friendly names
 
 ## Critical Instructions
 - Follow the naming and commenting convention strictly as shown in the example below.
-- Never guess column names — ask if unsure and the column name will be provided.
 
 ## M3 Naming
 M3 table and field names are short technical identifiers, typically 6 characters long. MDP (Metadata Publisher) is M3's own user-friendly naming layer for tables and fields.
