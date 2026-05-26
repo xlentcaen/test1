@@ -248,8 +248,10 @@ The preferred behavior should be configurable.
 | [Warehouse] | OBWHLO | Field | OOLINE |
 | [Division] | OBDIVI | Field | OOLINE |
 | [Division] | OADIVI | Field | OOHEAD |
-| [Customer order number] | OBORST | Field | OOLINE |
-| [Customer order number] | OAORST | Field | OOHEAD |
+| [Customer order number] | OBORNO | Field | OOLINE |
+| [Customer order number] | OAORNO | Field | OOHEAD |
+| [Customer order status] | OBORST | Field | OOLINE |
+| [Customer order status] | OAORST | Field | OOHEAD |
 | [Customer Number] | OPCUNO | Field | OCUSAD |
 | [Description] | CTTX40 | Field | CSYTAB |
 | [Delivery customer order fields] | UB* | Field Prefix | ODLINE |
