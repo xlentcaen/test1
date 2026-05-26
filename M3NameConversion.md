@@ -4,6 +4,10 @@
 Convert SQL queries written with M3 MDP (Metadata Publisher) naming standard into technical M3 names (Usually six characters in tables and columns). The MDP names are also referred to "user-friendly" [...]
 The input is in MDP-format and the output is in technical M3 names.
 
+## Critical instructions
+Follow the convention in naming and commenting strictly according to the example below.
+Never guess column names when unsure ask me and I'll input the column name.
+
 
 ## M3 Naming
 In M3, table names are technical identifiers and are typically 6 characters long.
@@ -70,10 +74,6 @@ The SQL conversion logic should use the MDP database and/or CSV files as the pri
 - Submitted SQL may reference `... CodeTable` names that do not physically exist in the MDP library.
 - These `... CodeTable` names should be treated as logical views over `CSYTAB`.
 - A `... CodeTable` view resolves to `CSYTAB` for the technical table name, but keeps its own friendly column names for mapping purposes.
-
-
-## Example
-Follow the convention in naming and commenting strictly according to the example below.
 
 
 ### User-Friendly (MDP -Metadata Publisher) input
