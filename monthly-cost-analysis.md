@@ -79,9 +79,96 @@ Characteristics:
 - Have their negative result allocated onward to **Profit Centers**
 - Reflect both direct costs and allocated costs in their cost base
 
-## Cost Calculations
-- **TOTAL LOCAL COSTS** = **Total Operating Costs** + **Total Internal Fees**
-- **Total Costs** = **TOTAL LOCAL COSTS** + **Service fee**
+## Account Structure (CostRpt)
+
+The following defines the full account hierarchy used in the cost report. Each summary line is the sum of its indented components.
+
+### Headcount
+
+**Approved Headcount** =
+- \+ Approved Headcount Blue Collar
+- \+ Approved Headcount White Collar
+
+**Forecast Headcount** =
+- \+ Forecast Headcount Blue Collar
+- \+ Forecast Headcount White Collar
+
+### Total Operational costs
+
+**Total Operational costs** =
+- \+ Op. costs Purchase/Integrated Resources Sum
+- \+ Op. costs Agency people P&D
+- \+ Op. costs Consultants
+- \+ Op. costs IKEA IT (Only CC935-CC939) Sum
+- \+ Op. IT Cost excl IKEA IT (Only CC935-CC939) Sum
+- \+ Op. costs Samples
+- \+ Op. costs Consumable equipment and supplies
+- \+ Op. costs Maintenance and repairs on equipment
+- \+ Op. costs other
+- \+ Total Op. Tools
+- \+ Extra ordinary Operational cost (Corona)
+
+### Other income Inter IKEA group Sum
+
+**Other income Inter IKEA group Sum** =
+- \+ Other income Inter IKEA group
+- \+ 3930
+- \+ 3955
+- \+ 3961
+
+### Total Operating costs
+
+**Total Operating costs** =
+- \+ Travel costs
+- \+ Staff excl TACK
+- \+ TACK incl social fees
+- \+ Local Incentives
+- \+ Total Operational costs
+- \+ Depreciation of equipment
+- \+ Rental premises internal
+- \+ Rental premises external
+- \+ Calculated inventory costs
+- \+ Interest income
+- \+ Interest expense
+- \+ Tax Service fee
+- \+ Other income ICOMP group
+- \+ Other income external
+- \+ Extra ordinary cost Staff (Corona)
+- \+ Other income Inter IKEA group Sum
+
+### TOTAL INTERNAL FEES
+
+**TOTAL INTERNAL FEES** =
+- \+ Internal fees IT
+- \+ Internal fees common
+- \+ Internal fees premises
+- \+ Internal fees local site support
+- \+ Internal fees
+
+### TOTAL LOCAL COSTS
+
+**TOTAL LOCAL COSTS** =
+- \+ Total Operating costs
+- \+ TOTAL INTERNAL FEES
+
+### Service fee
+
+**Service fee** =
+- \+ Service fee income SK
+- \+ Service fee income SE
+- \+ Service fee income CN
+- \+ Service fee income CN-NT
+- \+ Service fee cost CN-NT
+- \+ Service fee cost SK
+- \+ Service fee cost SE
+- \+ Service fee cost CN
+- \+ Currency gain/loss service fee
+
+### Total costs
+
+**Total costs** =
+- \+ TOTAL LOCAL COSTS
+- \+ Service fee
 
 ## Values
 - **Value LOC** = value in the local currency of the company
@@ -133,6 +220,13 @@ Characteristics:
 - Analyze how costs are distributed in the functional cost analysis
 - Track the impact of each functional area on total cost
 - Use the cost center groups **Internal fees common**, **Internal fees local site support**, and **Internal fees IT** to identify **CC-CC** cost centers
+
+### By Profit Center
+- Analyze allocated cost burden by profit center
+- Always refer to profit centers using both code and **Profit Center Name**
+- Example: **Q11 Assembly**
+- Compare cost absorption across profit-responsible units
+- Evaluate the impact of allocated results from **CC-PC** cost centers
 
 ## Control Checks
 
