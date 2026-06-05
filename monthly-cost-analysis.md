@@ -46,11 +46,6 @@ The analysis is based on the following accounting string dimensions:
 - **PC (Profit Center)** = Profit Center
 - **Profit Center Name** = descriptive name used together with the Profit Center code
 
-When referring to a **Profit Center**, always use the code together with the value from **Profit Center Name**.
-
-Example:
-- **Q11** should be written as **Q11 Assembly**
-
 For **Cost Centers**, use the cost center code only, since there is no separate **Cost Center Name** column.
 
 ## Cost Center Logic
@@ -60,7 +55,7 @@ Cost Centers are categorized as either:
 - **CC-PC**
 
 ### CC-CC Cost Centers
-**CC-CC** cost centers are allocation cost centers. They are allocated to other cost centers.
+**CC-CC** cost centers are allocation cost centers. They are allocated to other **CC-PC** cost centers.
 
 They are the cost centers that belong to the cost center groups:
 - **Internal fees common**
@@ -87,18 +82,6 @@ Characteristics:
 
 - **TOTAL LOCAL COSTS** = **Total Operating Costs** + **TOTAL INTERNAL FEES**
 - **Total Costs** = **TOTAL LOCAL COSTS** + **Service fee**
-
-## Functional Cost Calculations
-
-- **TOTAL COST** =
-  **Category Area**
-  + **Market costs**
-  + **Supply Chain**
-  + **Tools**
-  + **Component Development & Range**
-  + **Global Mgmt & Support**
-  + **Process & Digital Development**
-  + **Warehouse**
 
 ## Values
 - **Value LOC** = Value in local currency of the company
