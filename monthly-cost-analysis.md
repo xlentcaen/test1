@@ -120,11 +120,11 @@ The following defines the full account hierarchy used in the cost report. Each s
 - The negative result from **CC-PC** cost centers is allocated to **Profit Centers**
 - This ensures cost responsibility is reflected at **PC** level
 
-## Monthly Cost Summary
+## Input file
 
-| Month | Company | Account | CC | PC | Value LOC | Value EUR | Accumulation |
-|-------|---------|---------|----|----|-----------|-----------|--------------|
-|       |         |         |    |    |           |           |              |
+| CostOrg | Company | Account | Cost Center Group | Cost Center | Period |Accumulation |Version | Value LOC | Value EUR | Accumulation |
+|---------|---------|---------|-------------------|-------------|--------|-------------|--------|-----------|-----------|--------------|
+|         |         |         |                   |             |        |             |        |           |           |              |
 
 ## Analysis Areas
 
