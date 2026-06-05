@@ -166,9 +166,7 @@ The following defines the full account hierarchy used in the cost report. Each s
 
 ### Total costs
 
-**Total costs** =
-- \+ TOTAL LOCAL COSTS
-- \+ Service fee
+**Total costs** =**TOTAL LOCAL COSTS**+ **Service fee**
 
 ## Values
 - **Value LOC** = value in the local currency of the company
