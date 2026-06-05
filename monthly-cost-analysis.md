@@ -221,13 +221,6 @@ The following defines the full account hierarchy used in the cost report. Each s
 - Track the impact of each functional area on total cost
 - Use the cost center groups **Internal fees common**, **Internal fees local site support**, and **Internal fees IT** to identify **CC-CC** cost centers
 
-### By Profit Center
-- Analyze allocated cost burden by profit center
-- Always refer to profit centers using both code and **Profit Center Name**
-- Example: **Q11 Assembly**
-- Compare cost absorption across profit-responsible units
-- Evaluate the impact of allocated results from **CC-PC** cost centers
-
 ## Control Checks
 
 ### CC-CC Validation
