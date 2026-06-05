@@ -83,88 +83,21 @@ Characteristics:
 
 The following defines the full account hierarchy used in the cost report. Each summary line is the sum of its indented components.
 
-### Headcount
+**Approved Headcount** =**Approved Headcount Blue Collar**+**Approved Headcount White Collar**
 
-**Approved Headcount** =
-- \+ Approved Headcount Blue Collar
-- \+ Approved Headcount White Collar
+**Forecast Headcount** =**Forecast Headcount Blue Collar**+**Forecast Headcount White Collar**
 
-**Forecast Headcount** =
-- \+ Forecast Headcount Blue Collar
-- \+ Forecast Headcount White Collar
+**Total Operational costs** = **Op. costs Purchase/Integrated Resources Sum**+ **Op. costs Agency people P&D**+ **Op. costs Consultants**+ **Op. costs IKEA IT (Only CC935-CC939) Sum**+ **Op. IT Cost excl IKEA IT (Only CC935-CC939) Sum**+ **Op. costs Samples**+ **Op. costs Consumable equipment and supplies**+ **Op. costs Maintenance and repairs on equipment**+ **Op. costs other**+ **Total Op. Tools**+**Extra ordinary Operational cost (Corona)**
 
-### Total Operational costs
+**Other income Inter IKEA group Sum** = **Other income Inter IKEA group**+ **3930**+ **3955**+ **3961**
 
-**Total Operational costs** =
-- \+ Op. costs Purchase/Integrated Resources Sum
-- \+ Op. costs Agency people P&D
-- \+ Op. costs Consultants
-- \+ Op. costs IKEA IT (Only CC935-CC939) Sum
-- \+ Op. IT Cost excl IKEA IT (Only CC935-CC939) Sum
-- \+ Op. costs Samples
-- \+ Op. costs Consumable equipment and supplies
-- \+ Op. costs Maintenance and repairs on equipment
-- \+ Op. costs other
-- \+ Total Op. Tools
-- \+ Extra ordinary Operational cost (Corona)
+**Total Operating costs** = **Travel costs**+ **Staff excl TACK**+ **TACK incl social fees**+ **Local Incentives**+ **Total Operational costs**+ **Depreciation of equipment**+ **Rental premises internal**+ **Rental premises external**+ **Calculated inventory costs**+ **Interest income**+ **Interest expense**+ **Tax Service fee**+ **Other income ICOMP group**+ **Other income external**+ **Extra ordinary cost Staff (Corona)** + **Other income Inter IKEA group Sum**
 
-### Other income Inter IKEA group Sum
+**TOTAL INTERNAL FEES** =**Internal fees IT**+ **Internal fees common**+ **Internal fees premises**+ **Internal fees local site support**+ **Internal fees**
 
-**Other income Inter IKEA group Sum** =
-- \+ Other income Inter IKEA group
-- \+ 3930
-- \+ 3955
-- \+ 3961
+**TOTAL LOCAL COSTS** = **Total Operating costs**+**TOTAL INTERNAL FEES**
 
-### Total Operating costs
-
-**Total Operating costs** =
-- \+ Travel costs
-- \+ Staff excl TACK
-- \+ TACK incl social fees
-- \+ Local Incentives
-- \+ Total Operational costs
-- \+ Depreciation of equipment
-- \+ Rental premises internal
-- \+ Rental premises external
-- \+ Calculated inventory costs
-- \+ Interest income
-- \+ Interest expense
-- \+ Tax Service fee
-- \+ Other income ICOMP group
-- \+ Other income external
-- \+ Extra ordinary cost Staff (Corona)
-- \+ Other income Inter IKEA group Sum
-
-### TOTAL INTERNAL FEES
-
-**TOTAL INTERNAL FEES** =
-- \+ Internal fees IT
-- \+ Internal fees common
-- \+ Internal fees premises
-- \+ Internal fees local site support
-- \+ Internal fees
-
-### TOTAL LOCAL COSTS
-
-**TOTAL LOCAL COSTS** =
-- \+ Total Operating costs
-- \+ TOTAL INTERNAL FEES
-
-### Service fee
-
-**Service fee** =
-- \+ Service fee income SK
-- \+ Service fee income SE
-- \+ Service fee income CN
-- \+ Service fee income CN-NT
-- \+ Service fee cost CN-NT
-- \+ Service fee cost SK
-- \+ Service fee cost SE
-- \+ Service fee cost CN
-- \+ Currency gain/loss service fee
-
-### Total costs
+**Service fee** = **Service fee income SK**+ **Service fee income SE**+ **Service fee income CN**+ **Service fee income CN-NT**+ **Service fee cost CN-NT**+ **Service fee cost SK**+ **Service fee cost SE**+ **Service fee cost CN**+ **Currency gain/loss service fee**
 
 **Total costs** =**TOTAL LOCAL COSTS**+ **Service fee**
 
