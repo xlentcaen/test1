@@ -183,6 +183,12 @@ Validate that:
 - the final Profit Center cost view reflects both direct and allocated costs
 - Profit Centers are referred to using both code and **Profit Center Name**
 
+### Headcount Validation
+Validate that:
+- **Forecasted Headcount** is compared with **Approved Headcount**
+- deviations between **Forecasted Headcount** and **Approved Headcount** are identified and reviewed
+- this check is applied for both **WC (White collar)** and **BC (Blue collar)**
+
 ## Key Review Questions
 - Which companies carry the largest cost base?
 - Which accounts explain the main cost movements?
@@ -195,6 +201,7 @@ Validate that:
 - Is **CN** only being used for validation and not for performance evaluation?
 - Are Profit Centers consistently named using both code and **Profit Center Name**?
 - Are **CC-CC** cost centers correctly identified through the cost center groups **Internal fees common**, **Internal fees local site support**, and **Internal fees IT**?
+- Does **Forecasted Headcount** deviate from **Approved Headcount** for **WC (White collar)** or **BC (Blue collar)**?
 
 ## Notes
 Use:
@@ -207,3 +214,4 @@ Use:
 - always refer to Profit Centers using both the code and **Profit Center Name**
 - refer to Cost Centers using the code only
 - treat cost centers in the cost center groups **Internal fees common**, **Internal fees local site support**, and **Internal fees IT** as **CC-CC** cost centers
+- validate deviations between **Forecasted Headcount** and **Approved Headcount** for both **WC (White collar)** and **BC (Blue collar)**
