@@ -3,7 +3,7 @@
 ## Explanations
 
 ### Scope
-This is a **cost-focused** analysis.
+This analysis focuses on the different type of costs in the P&L.
 
 ### Company
 The companies in the group are:
