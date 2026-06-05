@@ -3,7 +3,7 @@
 ## Explanations
 
 ### Scope
-This is a **full P&L** analysis.
+This is a Cost statement containing Actuals and Forecasts.
 
 ### Company
 The companies in the group are:
@@ -38,14 +38,8 @@ The analysis is based on the following accounting string dimensions:
 
 - **Account** = General Ledger account
 - **CC (Cost Center)** = three-digit number
-- **PC (Profit Center)** = Profit Center
-- **Profit Center Name** = descriptive name used together with the Profit Center code
-
-When referring to a **Profit Center**, always use the code together with the value from **Profit Center Name**.
 
 Example:
-- **Q11** should be written as **Q11 Assembly**
-
 For **Cost Centers**, use the cost center code only, since there is no separate **Cost Center Name** column.
 
 ## Cost Center Logic
@@ -73,26 +67,6 @@ Characteristics:
 - This negative result needs to be allocated to **Profit Centers**
 - Their cost base reflects both direct costs and allocated costs
 
-## Account P&L Calculations
-
-- **TOTAL LOCAL COSTS** = **Total Operating Costs** + **TOTAL INTERNAL FEES**
-- **Total Costs** = **TOTAL LOCAL COSTS** + **Service fee**
-- **Profit** = **Margin** - **Total Costs**
-
-## Functional P&L Calculations
-
-- **TOTAL COST** =
-  **Category Area**
-  + **Market costs**
-  + **Supply Chain**
-  + **Tools**
-  + **Component Development & Range**
-  + **Global Mgmt & Support**
-  + **Process & Digital Development**
-  + **Warehouse**
-
-- **OPERATING RESULT** = **TOTAL GP** + **TOTAL COST**
-
 ## Values
 - **Value LOC** = Value in local currency of the company
 - **Value EUR** = Value in EUR using the fixed standard exchange rate set for the full fiscal year
@@ -111,12 +85,6 @@ Characteristics:
 ### Step 3: Profit Centers
 - The negative result from **CC-PC** cost centers is allocated to **Profit Centers**
 - This ensures profitability is reflected at **PC** level
-
-## Monthly P&L Summary
-
-| Month | Company | Account | CC | PC | Value LOC | Value EUR | Accumulation |
-|-------|---------|---------|----|----|-----------|-----------|--------------|
-|       |         |         |    |    |           |           |              |
 
 ## Analysis Areas
 
@@ -139,17 +107,6 @@ Characteristics:
 - Review how costs are allocated from **CC-CC** to **CC-PC** through **Total Internal Fees**
 - Review how negative results in **CC-PC** are allocated onward to **Profit Centers**
 - Use cost center codes only when referring to Cost Centers
-
-### By Cost Center Group
-- Analyze how costs are distributed in the functional P&L
-- Track the impact of each functional area on total cost and operating result
-
-### By Profit Center
-- Analyze profitability by Profit Center
-- Always refer to Profit Centers using both code and **Profit Center Name**
-- Example: **Q11 Assembly**
-- Compare commercial/business performance across profit-responsible units
-- Evaluate the impact of allocated results from **CC-PC** cost centers
 
 ## Control Checks
 
