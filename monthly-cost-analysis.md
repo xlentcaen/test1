@@ -160,12 +160,6 @@ For **CC-PC** cost centers, validate that:
 - their negative result is allocated onward to Profit Centers
 - cost responsibility at Profit Center level reflects these allocations
 
-### Profit Center Validation
-Validate that:
-- Profit Centers receive the allocated negative result from **CC-PC**
-- the final Profit Center cost view reflects both direct and allocated costs
-- Profit Centers are referred to using both code and **Profit Center Name**
-
 ### Headcount Validation
 Validate that:
 - **Forecasted Headcount** is compared with **Approved Headcount**
