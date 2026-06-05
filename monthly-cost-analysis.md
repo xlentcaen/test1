@@ -134,13 +134,6 @@ Characteristics:
 - Track the impact of each functional area on total cost
 - Use the cost center groups **Internal fees common**, **Internal fees local site support**, and **Internal fees IT** to identify **CC-CC** cost centers
 
-### By Profit Center
-- Analyze allocated cost burden by profit center
-- Always refer to profit centers using both code and **Profit Center Name**
-- Example: **Q11 Assembly**
-- Compare cost absorption across profit-responsible units
-- Evaluate the impact of allocated results from **CC-PC** cost centers
-
 ## Control Checks
 
 ### CC-CC Validation
@@ -167,16 +160,13 @@ Validate that:
 - The check is applied for both **WC (White collar)** and **BC (Blue collar)**
 
 ## Key Review Questions
-- Which companies carry the largest cost base?
 - Which accounts explain the main cost movements?
 - Which cost centers or cost center groups are driving the cost base?
 - Do all **CC-CC** cost centers net to zero as expected?
 - Are allocated costs fully transferred from **CC-CC** to **CC-PC**?
 - Are negative results in **CC-PC** allocated correctly to profit centers?
-- Which profit centers absorb the highest costs?
 - How do **Monthly** and **YTD** views differ across the fiscal year?
 - Is **CN** used only for validation and not for performance evaluation?
-- Are profit centers consistently named using both code and **Profit Center Name**?
 - Are **CC-CC** cost centers correctly identified through the cost center groups **Internal fees common**, **Internal fees local site support**, and **Internal fees IT**?
 - Does **Forecasted Headcount** deviate from **Approved Headcount** for **WC (White collar)** or **BC (Blue collar)**?
 
@@ -190,7 +180,6 @@ Use:
 
 Remember:
 - Exclude **CN** from performance analysis
-- Always refer to **Profit Centers** using both code and **Profit Center Name**
-- Refer to **Cost Centers** using the code only
+- Refer to **Cost Centers** using the code and **Cost Centers Name**
 - Treat cost centers in **Internal fees common**, **Internal fees local site support**, and **Internal fees IT** as **CC-CC** cost centers
 - Validate deviations between **Forecasted Headcount** and **Approved Headcount** for both **WC (White collar)** and **BC (Blue collar)**
