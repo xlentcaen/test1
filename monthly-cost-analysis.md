@@ -17,6 +17,11 @@ The companies in the group are:
 ### Cost Center Group
 **Cost Center Group** is a grouping of Cost Centers. It maps where the cost appears in the **functional cost analysis**.
 
+The following cost center groups define **CC-CC** cost centers:
+- **Internal fees common**
+- **Internal fees local site support**
+- **Internal fees IT**
+
 ### Period
 **Period** is the month in format `YYYYMM`.
 
@@ -56,6 +61,11 @@ Cost Centers are categorized as either:
 
 ### CC-CC Cost Centers
 **CC-CC** cost centers are allocation cost centers. They are allocated to other cost centers.
+
+They are the cost centers that belong to the cost center groups:
+- **Internal fees common**
+- **Internal fees local site support**
+- **Internal fees IT**
 
 Characteristics:
 - They carry **Total Operating Costs**
@@ -100,6 +110,7 @@ Characteristics:
 - **CC-CC** cost centers collect operating costs
 - These costs are offset through **Total Internal Fees**
 - Result in **CC-CC** should always be **0**
+- **CC-CC** cost centers are those in the cost center groups **Internal fees common**, **Internal fees local site support**, and **Internal fees IT**
 
 ### Step 2: CC-PC Cost Centers
 - **CC-PC** cost centers receive allocations from **CC-CC** through **Total Internal Fees**
@@ -136,10 +147,12 @@ Characteristics:
 - Review how costs are allocated from **CC-CC** to **CC-PC** through **Total Internal Fees**
 - Review how negative results in **CC-PC** are allocated onward to **Profit Centers**
 - Use cost center codes only when referring to Cost Centers
+- Treat cost centers in the cost center groups **Internal fees common**, **Internal fees local site support**, and **Internal fees IT** as **CC-CC** cost centers
 
 ### By Cost Center Group
 - Analyze how costs are distributed in the functional cost analysis
 - Track the impact of each functional area on total cost
+- Use the cost center groups **Internal fees common**, **Internal fees local site support**, and **Internal fees IT** to identify **CC-CC** cost centers
 
 ### By Profit Center
 - Analyze allocated cost burden by Profit Center
@@ -155,6 +168,7 @@ For **CC-CC** cost centers, validate that:
 - **Total Operating Costs** + **Total Internal Fees** offset each other
 - the final result is always **0**
 - any deviation indicates a possible allocation or posting issue
+- the cost center belongs to one of the cost center groups **Internal fees common**, **Internal fees local site support**, or **Internal fees IT**
 
 ### CC-PC Validation
 For **CC-PC** cost centers, validate that:
@@ -180,6 +194,7 @@ Validate that:
 - How do **Monthly** and **YTD** views differ across the fiscal year?
 - Is **CN** only being used for validation and not for performance evaluation?
 - Are Profit Centers consistently named using both code and **Profit Center Name**?
+- Are **CC-CC** cost centers correctly identified through the cost center groups **Internal fees common**, **Internal fees local site support**, and **Internal fees IT**?
 
 ## Notes
 Use:
@@ -191,3 +206,4 @@ Use:
 - include **CN** for validation, reconciliation, and historical transaction checks
 - always refer to Profit Centers using both the code and **Profit Center Name**
 - refer to Cost Centers using the code only
+- treat cost centers in the cost center groups **Internal fees common**, **Internal fees local site support**, and **Internal fees IT** as **CC-CC** cost centers
