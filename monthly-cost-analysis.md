@@ -1,7 +1,7 @@
 # Monthly Cost Analysis
 
 ## Purpose and Scope
-This document defines the structure, terminology, and review logic for monthly cost analysis in the P&L. It is intended to support consistent analysis across companies, accounts, cost centers, cost center groups, and profit centers.
+This document defines the structure, terminology, and review logic for monthly cost analysis of the P&L. It is intended to support consistent analysis across companies, accounts, cost centers and cost center groups.
 
 ## Core Definitions
 
@@ -15,7 +15,7 @@ The companies in the group are:
 **CN** is a legacy company. It may still contain financial transactions and can be used for **validation**, **reconciliation**, and **historical transaction review**, but it must **not** be used for **performance analysis**.
 
 ### Cost Center Group
-A **Cost Center Group** is a grouping of cost centers used to show where cost appears in the **functional cost analysis**.
+A **Cost Center Group** is a grouping of cost centers used to show where cost appears from a functional point of view.
 
 The following cost center groups define **CC-CC** cost centers:
 - **Internal fees common**
@@ -43,11 +43,9 @@ The analysis is based on the following accounting string dimensions:
 
 - **Account** = General Ledger account
 - **CC (Cost Center)** = three-digit cost center code
-- **PC (Profit Center)** = profit center code
 - **Profit Center Name** = descriptive name used together with the profit center code
 
 Guidelines:
-- Always refer to **Profit Centers** using both the code and **Profit Center Name**
 - Refer to **Cost Centers** using the code only, since there is no separate **Cost Center Name** column
 
 ## Cost Center Logic
@@ -56,19 +54,17 @@ Cost centers are categorized as either:
 - **CC-PC**
 
 ### CC-CC Cost Centers
-**CC-CC** cost centers are allocation cost centers that are allocated to **CC-PC** cost centers.
+**CC-CC** cost centers costs are allocated to **CC-PC** cost centers according to a **CC-CC Key**. The **CC-PC** cost centers are allocated to **PC** in a later stage.
 
 A cost center is classified as **CC-CC** if it belongs to one of these cost center groups:
 - **Internal fees common**
 - **Internal fees local site support**
 - **Internal fees IT**
 
-Characteristics:
+Characteristics of a **CC-CC** cost center :
 - Carry **Total Operating Costs**
 - Receive offsetting income through **Total Internal Fees**
 - Should always have a final result of **0**
-
-This means that operating cost in a **CC-CC** cost center should be fully offset by internal fee postings.
 
 ### CC-PC Cost Centers
 **CC-PC** cost centers are operational cost centers linked to profit centers.
@@ -122,9 +118,9 @@ The following defines the full account hierarchy used in the cost report. Each s
 
 ## Input file
 
-| CostOrg | Company | Account | Cost Center Group | Cost Center | Period |Accumulation |Version | Value LOC | Value EUR | Accumulation |
-|---------|---------|---------|-------------------|-------------|--------|-------------|--------|-----------|-----------|--------------|
-|         |         |         |                   |             |        |             |        |           |           |              |
+| CostOrg | Company | Account | Cost Center Group | Cost Center | Period |Accumulation |Version | Value LOC | Value EUR |
+|---------|---------|---------|-------------------|-------------|--------|-------------|--------|-----------|-----------|
+|         |         |         |                   |             |        |             |        |           |           |
 
 ## Analysis Areas
 
@@ -173,17 +169,17 @@ For **CC-PC** cost centers, validate that:
 
 ### Headcount Validation
 Validate that:
+- The non financial accounts **Forecasted Headcount** and **Approved Headcount** are relevant for comparisons
 - **Forecasted Headcount** is compared with **Approved Headcount**
 - Deviations between **Forecasted Headcount** and **Approved Headcount** are identified and reviewed
 - The check is applied for both **WC (White collar)** and **BC (Blue collar)**
 
 ## Key Review Questions
-- Which accounts explain the main cost movements?
 - Which cost centers or cost center groups are driving the cost base?
 - Do all **CC-CC** cost centers net to zero as expected?
 - Are allocated costs fully transferred from **CC-CC** to **CC-PC**?
 - Are negative results in **CC-PC** allocated correctly to profit centers?
-- How do **Monthly** and **YTD** views differ across the fiscal year?
+- If values in **Monthly** are volatile, how is the slower **YTD** doing?
 - Is **CN** used only for validation and not for performance evaluation?
 - Are **CC-CC** cost centers correctly identified through the cost center groups **Internal fees common**, **Internal fees local site support**, and **Internal fees IT**?
 - Does **Forecasted Headcount** deviate from **Approved Headcount** for **WC (White collar)** or **BC (Blue collar)**?
