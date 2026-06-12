@@ -83,23 +83,33 @@ The following defines the full account hierarchy used in the cost report. Each s
 
 **Forecast Headcount** =**Forecast Headcount Blue Collar**+**Forecast Headcount White Collar**
 
-**Total Operational costs** = **Op. costs Purchase/Integrated Resources Sum**+ **Op. costs Agency people P&D**+ **Op. costs Consultants**+ **Op. costs IKEA IT (Only CC935-CC939) Sum**+ **Op. IT Cost excl IKEA IT (Only CC935-CC939) Sum**+ **Op. costs Samples**+ **Op. costs Consumable equipment and supplies**+ **Op. costs Maintenance and repairs on equipment**+ **Op. costs other**+ **Total Op. Tools**+**Extra ordinary Operational cost (Corona)**
+**Total Operational costs** = **Op. costs Purchase/Integrated Resources Sum**+ **Op. costs Agency people P&D**+ **Op. costs Consultants**+ **Op. costs IKEA IT (Only CC935-CC939) Sum**+ **Op. IT Cost excl IKEA IT Sum**+ **Other income Inter IKEA group Sum**
 
 **Other income Inter IKEA group Sum** = **Other income Inter IKEA group**+ **3930**+ **3955**+ **3961**
 
-**Total Operating costs** = **Travel costs**+ **Staff excl TACK**+ **TACK incl social fees**+ **Local Incentives**+ **Total Operational costs**+ **Depreciation of equipment**+ **Rental premises internal**+ **Rental premises external**+ **Calculated inventory costs**+ **Interest income**+ **Interest expense**+ **Tax Service fee**+ **Other income ICOMP group**+ **Other income external**+ **Extra ordinary cost Staff (Corona)** + **Other income Inter IKEA group Sum**
+**Total Operating costs** = **Travel costs**+ **Staff excl TACK**+ **TACK incl social fees**+ **Local Incentives**+ **Total Operational costs**+ **Depreciation of equipment**+ **Rental premises internal**+ **Other Operating Costs**
 
 **TOTAL INTERNAL FEES** =**Internal fees IT**+ **Internal fees common**+ **Internal fees premises**+ **Internal fees local site support**+ **Internal fees**
 
 **TOTAL LOCAL COSTS** = **Total Operating costs**+**TOTAL INTERNAL FEES**
 
-**Service fee** = **Service fee income SK**+ **Service fee income SE**+ **Service fee income CN**+ **Service fee income CN-NT**+ **Service fee cost CN-NT**+ **Service fee cost SK**+ **Service fee cost SE**+ **Service fee cost CN**+ **Currency gain/loss service fee**
+**Service fee** = **Service fee income SK**+ **Service fee income SE**+ **Service fee income CN**+ **Service fee income CN-NT**+ **Service fee cost CN-NT**+ **Service fee cost SK**+ **Service fee cost SE**+ **Service fee cost CN**
 
 **Total costs** =**TOTAL LOCAL COSTS**+ **Service fee**
 
 ## Values
 - **Value LOC** = value in the local currency of the company. Only when looking at one company at the time. Sweden has SEK, Slovalia has EUR and China has RMB.
 - **Value EUR** = value in EUR using the fixed standard exchange rate for the full fiscal year. Can be used when looking at several companies at the time.
+
+### Number Format
+Values should be displayed with **thousand separators** (dot) and the **currency code** placed after the number.
+
+Format: `<number with thousand separators> <currency>`
+
+Examples:
+- `1.000 SEK` (one thousand Swedish kronor)
+- `25.500 EUR` (twenty-five thousand five hundred euro)
+- `1.250.000 RMB` (one million two hundred fifty thousand Chinese renminbi)
 
 ## Allocation Flow
 
