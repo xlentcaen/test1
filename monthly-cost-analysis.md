@@ -98,8 +98,8 @@ The following defines the full account hierarchy used in the cost report. Each s
 **Total costs** =**TOTAL LOCAL COSTS**+ **Service fee**
 
 ## Values
-- **Value LOC** = value in the local currency of the company
-- **Value EUR** = value in EUR using the fixed standard exchange rate for the full fiscal year
+- **Value LOC** = value in the local currency of the company. Only when looking at one company at the time. Sweden has SEK, Slovalia has EUR and China has RMB.
+- **Value EUR** = value in EUR using the fixed standard exchange rate for the full fiscal year. Can be used when looking at several companies at the time.
 
 ## Allocation Flow
 
